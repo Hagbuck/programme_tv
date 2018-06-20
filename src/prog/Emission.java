@@ -7,16 +7,28 @@ public class Emission {
 	
 	private Date date_begin;
 	private Date date_end;
-	private Channel channel;
+	//private Channel channel; A DISCUTER
 	private String title;
 	private String desc;
-	private Personne director;
+	
 	private ArrayList<Personne> actors;
 	private int length;
 	private String country;
 	private String type;
 
-	public Emission(Date date_begin, Date date_end, Channel channel, String title, String desc, int length,
+	//added
+	public 	String pathToIcon;
+	private String unitOfLength;
+	
+	//changed
+	private String channel;
+	private ArrayList<Personne> director;
+	
+	public Emission()
+	{
+		
+	}
+	public Emission(Date date_begin, Date date_end, String channel, String title, String desc, int length,
 			String country, String type) {
 		this.date_begin = date_begin;
 		this.date_end = date_end;
@@ -28,9 +40,9 @@ public class Emission {
 		this.type = type;
 	}
 	
-	public void setDirector(Personne p)
+	public void addDirector(Personne p)
 	{
-		director = p;
+		director.add(p);
 	}
 	
 	public void addActor(Personne p)

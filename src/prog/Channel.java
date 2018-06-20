@@ -6,6 +6,11 @@ public class Channel {
 	private String name;
 	public String pathToIcon;
 	
+	
+	public Channel()
+	{
+		
+	}
 	public Channel(String p_id,String p_name,String p_path)
 	{
 		this.id = p_id;

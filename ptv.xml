@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE tv SYSTEM "xmltv.dtd">
+
+<tv source-info-url="https://api.telerama.fr" source-data-url="https://api.telerama.fr" generator-info-name="XMLTV France" generator-info-url="http://www.xmltv.fr">
+  <channel id="C111.api.telerama.fr">
+    <display-name>Arte</display-name>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/sheet_media/tv/500x500/111.png" />
+  </channel>
+  <channel id="C112.api.telerama.fr">
+    <display-name>LCI</display-name>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/sheet_media/tv/500x500/112.png" />
+  </channel>
+  <channel id="C118.api.telerama.fr">
+    <display-name>M6</display-name>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/sheet_media/tv/500x500/118.png" />
+  </channel>
+  <channel id="C119.api.telerama.fr">
+    <display-name>W9</display-name>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/sheet_media/tv/500x500/119.png" />
+  </channel>
+  <channel id="C1399.api.telerama.fr">
+    <display-name>Chérie 25</display-name>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/sheet_media/tv/500x500/1399.png" />
+  </channel>
+  <channel id="C1400.api.telerama.fr">
+    <display-name>RMC Découverte</display-name>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/sheet_media/tv/500x500/1400.png" />
+  </channel>
+  <channel id="C1401.api.telerama.fr">
+    <display-name>L'Equipe</display-name>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/sheet_media/tv/500x500/1401.png" />
+  </channel>
+  <channel id="C1402.api.telerama.fr">
+    <display-name>Numéro 23</display-name>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/sheet_media/tv/500x500/1402.png" />
+  </channel>
+  <channel id="C1403.api.telerama.fr">
+    <display-name>6ter</display-name>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/sheet_media/tv/500x500/1403.png" />
+  </channel>
+  <channel id="C1404.api.telerama.fr">
+    <display-name>TF1 Series Films</display-name>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/sheet_media/tv/500x500/1404.png" />
+  </channel>
+  <channel id="C145.api.telerama.fr">
+    <display-name>Paris Première</display-name>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/sheet_media/tv/500x500/145.png" />
+  </channel>
+  <channel id="C160.api.telerama.fr">
+    <display-name>France Ô</display-name>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/sheet_media/tv/500x500/160.png" />
+  </channel>
+  <channel id="C192.api.telerama.fr">
+    <display-name>TF1</display-name>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/sheet_media/tv/500x500/192.png" />
+  </channel>
+  <channel id="C195.api.telerama.fr">
+    <display-name>TMC</display-name>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/sheet_media/tv/500x500/195.png" />
+  </channel>
+  <channel id="C2111.api.telerama.fr">
+    <display-name>Franceinfo</display-name>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/sheet_media/tv/500x500/2111.png" />
+  </channel>
+  <channel id="C226.api.telerama.fr">
+    <display-name>CNEWS</display-name>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/sheet_media/tv/500x500/226.png" />
+  </channel>
+  <channel id="C234.api.telerama.fr">
+    <display-name>La Chaîne parlementaire</display-name>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/sheet_media/tv/500x500/234.png" />
+  </channel>
+  <channel id="C34.api.telerama.fr">
+    <display-name>Canal+</display-name>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/sheet_media/tv/500x500/34.png" />
+  </channel>
+  <channel id="C4.api.telerama.fr">
+    <display-name>France 2</display-name>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/sheet_media/tv/500x500/4.png" />
+  </channel>
+  <channel id="C444.api.telerama.fr">
+    <display-name>NRJ 12</display-name>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/sheet_media/tv/500x500/444.png" />
+  </channel>
+  <channel id="C445.api.telerama.fr">
+    <display-name>C8</display-name>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/sheet_media/tv/500x500/445.png" />
+  </channel>
+  <channel id="C446.api.telerama.fr">
+    <display-name>TFX</display-name>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/sheet_media/tv/500x500/446.png" />
+  </channel>
+  <channel id="C458.api.telerama.fr">
+    <display-name>CSTAR</display-name>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/sheet_media/tv/500x500/458.png" />
+  </channel>
+  <channel id="C47.api.telerama.fr">
+    <display-name>France 5</display-name>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/sheet_media/tv/500x500/47.png" />
+  </channel>
+  <channel id="C481.api.telerama.fr">
+    <display-name>BFM TV</display-name>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/sheet_media/tv/500x500/481.png" />
+  </channel>
+  <channel id="C482.api.telerama.fr">
+    <display-name>Gulli</display-name>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/sheet_media/tv/500x500/482.png" />
+  </channel>
+  <channel id="C78.api.telerama.fr">
+    <display-name>France 4</display-name>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/sheet_media/tv/500x500/78.png" />
+  </channel>
+  <channel id="C80.api.telerama.fr">
+    <display-name>France 3</display-name>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/sheet_media/tv/500x500/80.png" />
+  </channel>
+
+  <programme start="20180430062500 +0200" stop="20180430071000 +0200" showview="" channel="C111.api.telerama.fr">
+    <title>Cosmos : une odyssée à travers l'univers</title>
+    <sub-title>Les immortels</sub-title>
+    <desc lang="fr">Enquête sur le futur et les messages laissés par l'homme via son ADN : zoom sur une vision pleine d'espoir du futur, proposée par l'astrophysicien Neil deGrasse.</desc>
+    <credits>
+      <director>Brannon Braga</director>
+      <director>Bill Pope</director>
+    </credits>
+    <date>2013</date>
+    <category lang="fr">documentaire : sciences et technique</category>
+    <length units="minutes">45</length>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/sheet_media/media/169_EMI_504135.jpg" />
+    <country>américain</country>
+    <video>
+      <aspect>16:9</aspect>
+      <quality>HDTV</quality>
+    </video>
+    <previously-shown />
+    <rating system="CSA">
+      <value>Tout public</value>
+    </rating>
+  </programme>
+  <programme start="20180430084000 +0200" stop="20180430092500 +0200" showview="" channel="C111.api.telerama.fr">
+    <title>Mission Amazonie</title>
+    <sub-title>En terrain inconnu</sub-title>
+    <desc lang="fr">Pour la première fois, une équipe de biologistes part explorer les zones montagneuses du parc national Serra da Mocidade, au fin fond de l'Amazonie brésilienne.</desc>
+    <credits>
+      <director>Mauricio Dias</director>
+    </credits>
+    <category lang="fr">documentaire : animalier</category>
+    <length units="minutes">45</length>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/sheet_media/media/169_EMI_819782.jpg" />
+    <country>germano-brésilien</country>
+    <video>
+      <aspect>16:9</aspect>
+      <quality>HDTV</quality>
+    </video>
+    <previously-shown />
+    <rating system="CSA">
+      <value>Tout public</value>
+    </rating>
+  </programme>
+  <programme start="20180430111000 +0200" stop="20180430115500 +0200" showview="" channel="C111.api.telerama.fr">
+    <title>Tapis persans d'Ispahan</title>
+    <sub-title>Le retour d'une vieille tradition</sub-title>
+    <desc lang="fr">A Ispahan, Shanty Ghaffarian vend des tapis persans finement ouvragés. Mais le contexte est difficile, et le jeune homme n'a que peu de temps pour sa vie personnelle.</desc>
+    <credits>
+      <director>Sebastian Kentner</director>
+    </credits>
+    <category lang="fr">documentaire : société</category>
+    <length units="minutes">45</length>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/sheet_media/media/169_EMI_822091.jpg" />
+    <country>allemand</country>
+    <video>
+      <aspect>16:9</aspect>
+      <quality>HDTV</quality>
+    </video>
+    <previously-shown />
+    <rating system="CSA">
+      <value>Tout public</value>
+    </rating>
+  </programme>
+  <programme start="20180430133000 +0200" stop="20180430154000 +0200" showview="" channel="C111.api.telerama.fr">
+    <title>L'aventurier du Rio Grande</title>
+    <desc lang="fr">Après avoir tué l'assassin de son père, Martin Brady s'est réfugié au Mexique. Devenu le garde du corps du politicien Cipriano Castro, il est envoyé au Texas, l'Etat qu'il a dû fuir, afin d'y chercher un convoi d'armes. En chemin, il se casse la jambe et se retrouve ainsi bloqué à Puerto, un village à proximité de la frontière. Le fourgon prend la route sans lui, subit un détournement. De son côté, Martin, profitant de son repos forcé, contacte le capitaine de la milice locale, un vieil ami de son père, qui lui certifie que son cas peut s'arranger. Mais à peine rétabli, Martin, pour venger l'un de ses amis qui vient de mourir, commet à nouveau un crime... 
+
+Critique : | Genre : western sentimental.
+
+A l’ouest, il y a toujours des pépites à redécouvrir. Dans L’Aventurier du Rio Grande (1959), de Robert Parrish, pas de poursuite infernale ni d’héroïsme. Le cinéaste a toujours été fier de ce western aux teintes mélancoliques où un porte-flingue à la jambe cassée (on voit Robert Mitchum tomber de cheval !), partagé entre deux rives et deux vies, connaît une renaissance morale. Le rôle fut refusé par Henry Fonda et Gregory Peck. Tant mieux, Robert Mitchum, qui aima d’emblée ce personnage d’individualiste un peu las, est étonnant : tendre, presque sentimental. Ce qui ne l’empêcha pas de prendre de sérieuses cuites sur le tournage avec les potes qu’il avait engagés. Car il était aussi coproducteur…</desc>
+    <credits>
+      <guest>Robert Mitchum (Martin Brady)</guest>
+      <guest>Julie London (Ellen Colton)</guest>
+      <guest>Gary Merrill (le commandant Colton)</guest>
+      <guest>Pedro Armendáriz (Cipriano Castro)</guest>
+      <guest>Albert Dekker (le capitaine Rucker)</guest>
+      <guest>Jack Oakie (Travis Hyte)</guest>
+      <guest>Charles McGraw (Herbert J Stovall)</guest>
+      <guest>Anthony Caruso (Santiago Santos)</guest>
+      <guest>Robert Parrish (Réalisateur/Metteur en Scène)</guest>
+      <guest>Alex North (Musique)</guest>
+      <guest>Robert Ardrey (Scénariste)</guest>
+      <guest>Tom Lea</guest>
+    </credits>
+    <date>1959</date>
+    <category lang="fr">film : western</category>
+    <length units="minutes">130</length>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/sheet_media/media/169_emi_820183.jpg" />
+    <country>américain</country>
+    <video>
+      <aspect>16:9</aspect>
+      <quality>HDTV</quality>
+    </video>
+    <audio>
+      <stereo>bilingual</stereo>
+    </audio>
+    <previously-shown />
+    <rating system="CSA">
+      <value>Tout public</value>
+    </rating>
+    <star-rating>
+      <value>3/5</value>
+    </star-rating>
+  </programme>
+  <programme start="20180430225000 +0200" stop="20180501005000 +0200" showview="" channel="C111.api.telerama.fr">
+    <title>L'étreinte du serpent</title>
+    <desc lang="fr">En guidant deux scientifiques, c’est son propre peuple que recherche un chaman d’Amazonie. Une rêverie luxuriante sur les traces de Fitzcarraldo. 
+
+Critique : | Genre : sur les traces de Fitzcarraldo.
+
+Dès le premier plan, Karamakate, chaman amazonien, ermite tourmenté, s’empare du film. Il en est le guide, à travers l’espace et le temps. C’est lui qui conduit vers l’inconnu, à des décennies de distance, deux scientifiques occidentaux venus le solliciter : un ethnologue allemand et un botaniste américain. Leurs voyages dans les méandres de l’Amazone se répètent, se ­répondent et se confondent dans une même quête obsédante d’une fleur ­mythique, curative et hallucinogène…
+
+De son troisième long métrage, le Colombien Ciro Guerra fait une immense ­rêverie aussi énigmatique, dense et luxuriante que cette jungle dans laquelle il est le ­premier, depuis une trentaine d’années, à poser sa caméra. L’Etreinte du ­serpent est un film d’aventures, dont le parcours ­sinueux, contemplatif et hypnotique glisse vers les confins de la folie, dans une Amazonie hantée. Ici, la violence des ­colons exploitant le caoutchouc ; plus loin, une mission catholique où des ­orphelins sont fouettés au cœur de la nuit ; ailleurs, un messie dément qui s’offre à ses adeptes dans une eucharistie cannibale… Tout ce périple, entre violence historique et vertige spirituel, semble suivre les traces de Werner Her­zog (Aguirre, la colère de Dieu ; Fitzcar­raldo). Et de Joseph Conrad, dans son roman Au cœur des ténèbres.</desc>
+    <credits>
+      <guest>Jacques Toulemonde Vidal</guest>
+      <guest>Alejandro Franco</guest>
+      <guest>David Gallego</guest>
+      <guest>Antonio Bolivar (Karamakate)</guest>
+      <guest>Brionne Davis (Evan)</guest>
+      <guest>Nilbio Torres (Karamakate jeune)</guest>
+      <guest>Jan Bijvoet (Theo)</guest>
+      <guest>Yauenkü Migue (Manduca)</guest>
+      <guest>Nicolás Cancino (Anizetto)</guest>
+      <guest>Luigi Sciamanna (Gaspar)</guest>
+      <guest>Nascuy Linares</guest>
+      <guest>Ciro Guerra</guest>
+      <guest>Ciro Guerra</guest>
+    </credits>
+    <date>2015</date>
+    <category lang="fr">film d'aventures</category>
+    <length units="hours">2</length>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/7fb07fad-8e15-4798-a8f8-6c2157a20151_2.jpg" />
+    <country>Colombie</country>
+    <video>
+      <aspect>16:9</aspect>
+      <quality>HDTV</quality>
+    </video>
+    <subtitles type="onscreen">
+      <language>fr</language>
+    </subtitles>
+    <rating system="CSA">
+      <value>Tout public</value>
+    </rating>
+    <star-rating>
+      <value>4/5</value>
+    </star-rating>
+  </programme>
+  <programme start="20180501015000 +0200" stop="20180501032000 +0200" showview="" channel="C111.api.telerama.fr">
+    <title>Fraktus, le dernier chapitre de l'histoire de la musique</title>
+    <desc lang="fr">Dans les années 80, le trio allemand Fraktus triomphait. La critique les encensait comme les inventeurs de la musique techno. Mais après une dispute, ses membres se sont séparés. Que sont-ils devenus ? Roger Dettner, producteur miteux, part sur leurs traces pour les convaincre de faire leur grand retour...</desc>
+    <credits>
+      <director>Lars Jessen</director>
+      <actor>Devid Striesow (Roger Dettner)</actor>
+      <actor>Heinz Strunk (Torsten Bage)</actor>
+      <actor>Rocko Schamoni (Dickie Schubert)</actor>
+      <actor>Jacques Palminger (Bernd Wand)</actor>
+      <actor>Piet Fuchs (Winnie)</actor>
+      <actor>Marcus Engelhardt (Dickie Schubert en 1983)</actor>
+      <actor>Kenny-David Baehr (Bernd Wand 1983)</actor>
+      <actor>Rafael Weitzel (Torsten Bage en 1983)</actor>
+      <writer>Studio Braun</writer>
+      <writer>Sebastian Schultz</writer>
+      <writer>Lars Jessen</writer>
+      <writer>Ingo Haeb</writer>
+      <composer>Carsten Meyer</composer>
+    </credits>
+    <category lang="fr">téléfilm humoristique</category>
+    <length units="minutes">90</length>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/sheet_media/media/169_GEP_547038.jpg" />
+    <country>allemand</country>
+    <video>
+      <aspect>16:9</aspect>
+      <quality>HDTV</quality>
+    </video>
+    <rating system="CSA">
+      <value>Tout public</value>
+    </rating>
+  </programme>
+  <programme start="20180501050000 +0200" stop="20180501055000 +0200" showview="" channel="C111.api.telerama.fr">
+    <title>La Folle Journée de Nantes 2017</title>
+    <sub-title>Musiques de danses</sub-title>
+    <desc lang="fr">Dédiée au rythme des peuples, la 23e édition de la Folle Journée s'achève en feu d'artifice avec le traditionnel concert de clôture, magnifié par la violoniste russe Alexandra Conunova.</desc>
+    <credits>
+      <actor>Alexandra Conunova (violon)</actor>
+      <guest>Andris Poga</guest>
+    </credits>
+    <category lang="fr">classique</category>
+    <length units="minutes">50</length>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/sheet_media/media/169_GEP_547103.jpg" />
+    <video>
+      <aspect>16:9</aspect>
+      <quality>HDTV</quality>
+    </video>
+    <previously-shown />
+    <rating system="CSA">
+      <value>Tout public</value>
+    </rating>
+  </programme>
+  <programme start="20180501055000 +0200" stop="20180501061500 +0200" showview="" channel="C111.api.telerama.fr">
+    <title>X:enius</title>
+    <sub-title>Batteries et accumulateurs</sub-title>
+    <desc lang="fr">Les batteries et les accumulateurs des voitures électriques sont principalement produits en Asie. Pour y remédier, l'Allemagne conçoit déjà les batteries du futur, mais souhaite à terme extraire et recycler sur place du lithium. C'est notamment le cas à l'Institut des procédés industriels de l'université technique de Brunswick.</desc>
+    <credits>
+      <presenter>Emilie Langlade</presenter>
+      <presenter>Adrian Pflug</presenter>
+    </credits>
+    <category lang="fr">magazine de découvertes</category>
+    <length units="minutes">25</length>
+    <icon src="http://television.telerama.fr/sites/tr_master/files/sheet_media/media/169_COL_731835.jpg" />
+    <video>
+      <aspect>16:9</aspect>
+      <quality>HDTV</quality>
+    </video>
+    <previously-shown />
+    <rating system="CSA">
+      <value>Tout public</value>
+    </rating>
+  </programme>
+
+  
+</tv>
