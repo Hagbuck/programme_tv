@@ -52,16 +52,12 @@ public class Emission {
 	
 	public String toString()
 	{
-<<<<<<< HEAD
-		return "[Emission]" + this.title;
-=======
 		String str = " ---- [EMISSION] ---- ";
 		str += "\n - Titre : "+this.title;
 		str += "\n - Channel  "+this.channel.toString();
 		
 		return str;
 		
->>>>>>> ef03c9f86d313ac4a9d6001b83647b69ef9e85fa
 	}
 
 }
