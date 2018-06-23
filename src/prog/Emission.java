@@ -49,5 +49,10 @@ public class Emission {
 	{
 		actors.add(p);
 	}
+	
+	public String toString()
+	{
+		return "";
+	}
 
 }

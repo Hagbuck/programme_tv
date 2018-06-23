@@ -1,4 +1,4 @@
-package prog;
+package utils;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -14,12 +14,18 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.events.XMLEvent;
 
+import prog.Channel;
+import prog.Emission;
+import prog.Personne;
+
 public class Parser {
 	private String pathToXML;
 	public int nbOfChannels;
 	
 	
-	private HashMap<Integer, Channel> ChannelsList;
+	public HashMap<Integer, Channel> ChannelsList = new HashMap<Integer, Channel>();
+	public ArrayList<Emission> EmissionList = new ArrayList<Emission>();
+	
 	private HashMap<String, ArrayList<Emission>> DictionnaryList;
 	private HashMap<Date, ArrayList<Emission>> ProgramOfADay;
 	
@@ -103,6 +109,7 @@ public class Parser {
 				  		
 				  		type = xmlsr.getLocalName();
 
+				  		//DETECT CHANNEL
 				  		if(type.equals("channel"))
 				  		{
 				  			
@@ -136,6 +143,7 @@ public class Parser {
 					            		xmlsr.next();
 					            		actualChannel.setName(xmlsr.getText());
 					            	}
+				            		
 					            	else if (xmlsr.getLocalName().equals("icon"))
 					            	{
 					            		actualChannel.pathToIcon = xmlsr.getAttributeValue(null, "src");
@@ -144,10 +152,14 @@ public class Parser {
 				            	}
 				            	
 				            }
-				            //System.out.println(actualChannel.toString() + " --- source "+ actualChannel.pathToIcon);
-
+				            //System.out.println(actualChannel.toString() + " [-] source "+ actualChannel.pathToIcon);
+				            
+				            //Ajouter dans une liste
+				            //System.out.println(actualChannel.toString());
+				            this.ChannelsList.put(nbOfChannels, actualChannel);
 				  		}
 				  		
+				  		//PROGRAMME
 				  		if(type.equals("programme"))
 				  		{
 				  			//exemple date 20180430062500 +0200
@@ -200,7 +212,7 @@ public class Parser {
 							  			);
 							  			*/
 							  			actualEmission = new Emission(date_begin, date_end,channelID,title,desc,length,country,typeOfEmission);
-				            			
+							  			EmissionList.add(actualEmission);
 				            			
 				            			continu = false;
 				            			dateString = "";
@@ -303,13 +315,14 @@ public class Parser {
 				  		break;
 				  		
 				  		
+				  	// Quezaco ?
 				  	case XMLEvent.END_ELEMENT:
 				  		type = xmlsr.getLocalName();
 				  		if(type.equals("channel"))
 				  		{	
-				  			//System.out.println("Fin Channel");
-				  			//actualChannel.toString();
-				  			//ChannelsList.put(nbOfChannels, actualChannel);
+				  			System.out.println("Fin Channel");
+				  			actualChannel.toString();
+				  			ChannelsList.put(nbOfChannels, actualChannel);
 				  		}
 
 				  		break;

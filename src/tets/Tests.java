@@ -1,4 +1,7 @@
-package prog;
+package tets;
+
+import prog.*;
+import utils.*;
 
 public class Tests {
 
@@ -9,6 +12,11 @@ public class Tests {
 		myParser.parse();
 
 		System.out.println(myParser.nbOfChannels);
+
+		for(int i=0;i<myParser.EmissionList.size();i++)
+		{
+			System.out.println(myParser.EmissionList.get(i).toString());
+		}
 		
 	}
 
