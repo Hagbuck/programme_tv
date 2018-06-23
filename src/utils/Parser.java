@@ -22,7 +22,6 @@ public class Parser {
 	private String pathToXML;
 	public int nbOfChannels;
 	
-	
 	public HashMap<Integer, Channel> ChannelsList = new HashMap<Integer, Channel>();
 	public ArrayList<Emission> EmissionList = new ArrayList<Emission>();
 	

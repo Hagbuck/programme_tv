@@ -52,7 +52,12 @@ public class Emission {
 	
 	public String toString()
 	{
-		return "";
+		String str = " ---- [EMISSION] ---- ";
+		str += "\n - Titre : "+this.title;
+		str += "\n - Channel  "+this.channel.toString();
+		
+		return str;
+		
 	}
 
 }
