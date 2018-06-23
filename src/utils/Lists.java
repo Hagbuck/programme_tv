@@ -11,23 +11,23 @@ import prog.Personne;
 
 public class Lists {
 	//I)
-	private HashMap<String, Channel> channelsList;
+	public HashMap<String, Channel> channelsList;
 	//II)
-	private ArrayList<Date> DaysOfPrograms;
+	public ArrayList<Date> DaysOfPrograms;
 	//III)
-	private HashMap<Date, ArrayList<Emission>> programOfADay;
+	public HashMap<Date, ArrayList<Emission>> programOfADay;
 	//V)
-	private TreeMap<Date,Emission> emissionBegin;
-	private TreeMap<Date,Emission> emissionEnd;
+	public TreeMap<Date,Emission> emissionBegin;
+	public TreeMap<Date,Emission> emissionEnd;
 	//VI)
-	private ArrayList<Personne> listOfActors;
-	private ArrayList<Personne> listOfDirectors;
+	public ArrayList<Personne> listOfActors;
+	public ArrayList<Personne> listOfDirectors;
 	//VIII
-	private TreeMap nbEmissionByType;
+	public TreeMap nbEmissionByType;
 	//IX
-	private HashMap<String, ArrayList<Emission>> DictionnaryList;
+	public HashMap<String, ArrayList<Emission>> DictionnaryList;
 	//Others
-	private ArrayList<Emission> EmissionList = new ArrayList<Emission>();
+	public ArrayList<Emission> EmissionList = new ArrayList<Emission>();
 	
 	
 	public Lists()
@@ -43,11 +43,4 @@ public class Lists {
 		this.DictionnaryList = new HashMap<String, ArrayList<Emission>>();
 		this.EmissionList = new ArrayList<Emission>();	
 	}
-
-	public boolean ajoutDate(Date dateToAdd)
-	{
-		//test si
-		return true;
-	}
-
 }
