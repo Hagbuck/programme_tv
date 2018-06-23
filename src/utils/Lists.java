@@ -19,10 +19,12 @@ public class Lists {
 	public TreeMap<Date,Emission> emissionBegin;
 	public TreeMap<Date,Emission> emissionEnd;
 	//VI)
-	public ArrayList<Personne> listOfActors;
-	public ArrayList<Personne> listOfDirectors;
+	
+	public HashMap<String,Personne> listOfActors;
+	public HashMap<String,Personne> listOfDirectors;
+
 	//VIII
-	public TreeMap nbEmissionByType;
+	public TreeMap<String,Integer> nbEmissionByType;
 	//IX
 	public HashMap<String, ArrayList<Emission>> DictionnaryList;
 	//Others
@@ -31,14 +33,14 @@ public class Lists {
 	
 	public Lists()
 	{
-		this.channelsList = new HashMap<String, Channel>(); 
-		this.programOfADay =  new HashMap<Date, ArrayList<Emission>>();
-		this.emissionBegin = new TreeMap<Date,Emission>();
-		this.emissionEnd = new TreeMap<Date,Emission>();
-		this.listOfActors= new ArrayList<Personne>();
-		this.listOfDirectors = new ArrayList<Personne>();
-		this.nbEmissionByType = new TreeMap();
-		this.DictionnaryList = new HashMap<String, ArrayList<Emission>>();
-		this.EmissionList = new ArrayList<Emission>();	
+		this.channelsList 		= new HashMap<String, Channel>(); 
+		this.programOfADay 		=  new HashMap<Date, ArrayList<Emission>>();
+		this.emissionBegin 		= new TreeMap<Date,Emission>();
+		this.emissionEnd 		= new TreeMap<Date,Emission>();
+		this.listOfActors		= new HashMap<String,Personne>();
+		this.listOfDirectors 	= new HashMap<String,Personne>();
+		this.nbEmissionByType 	= new TreeMap<String,Integer>();
+		this.DictionnaryList 	= new HashMap<String, ArrayList<Emission>>();
+		this.EmissionList 		= new ArrayList<Emission>();	
 	}
 }

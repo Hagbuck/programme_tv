@@ -32,7 +32,18 @@ public class Tests {
 		System.out.println(myLists.emissionEnd);
 		
 		
+		System.out.println("\n\n---- Affichage liste globale acteurs ----");
+		System.out.println(myLists.listOfActors);
+		
+		
+		System.out.println("\n\n---- Affichage liste globale directeurs ----");
+		System.out.println(myLists.listOfDirectors);
 
+		System.out.println("\n\n---- Test actors / director ----");
+		System.out.println(myLists.listOfDirectors.get("Brannon Braga").getNbPlayedEmission());
+		System.out.println(myLists.listOfActors.get("Alexandra Conunova (violon)").getNbPlayedEmission());
+		
+		
 	}
 
 }

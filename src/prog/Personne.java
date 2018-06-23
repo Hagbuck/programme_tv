@@ -14,6 +14,7 @@ public class Personne {
 	{
 		fullName = p_fname;
 		jobs = p_jobs;
+		playedEmission = new ArrayList<Emission>();
 	}
 	
 	public void addEmission(Emission em)
@@ -21,5 +22,13 @@ public class Personne {
 		playedEmission.add(em);
 	}
 	
+	public String getName()
+	{
+		return this.fullName;
+	}
+	public ArrayList<Job> getJobs()
+	{
+		return this.jobs;
+	}
 	public int getNbPlayedEmission() {return playedEmission.size();}
 } 

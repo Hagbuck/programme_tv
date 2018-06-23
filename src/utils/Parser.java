@@ -18,6 +18,7 @@ import prog.Emission;
 import prog.Job;
 import prog.Personne;
 
+
 public class Parser {
 	private String pathToXML;
 	//GETTER SETTERS
@@ -204,7 +205,7 @@ public class Parser {
 							  					+ "\n" + directors.toString()
 							  			);
 							  			*/
-				            			actualEmission = new Emission(date_begin, date_end,channelID,title,desc,length,country,typeOfEmission);
+				            			actualEmission = new Emission(date_begin, date_end,channelID,title,desc,length,country,typeOfEmission,unitOfLength,pathToIcon,actors,directors);
 				            			addEmissionValuesToLists(actualEmission,lists);
 
 				            			continu = false;
@@ -262,17 +263,18 @@ public class Parser {
 						            			if(xmlsr.getLocalName().equals("actor"))
 						            			{
 						            				xmlsr.next();
-						            				//System.out.println("un acteur : " + xmlsr.getText() );
-						            				//actors.add(Personne(xmlsr.getText(),Job.actor));
-						            				//TODO
+						            				ArrayList<Job> jobActor = new ArrayList<Job>();
+						            				jobActor.add(Job.actor);
+						            				actors.add(new Personne(xmlsr.getText(),jobActor));
+						            				
 						            			}
 						            			else if (xmlsr.getLocalName().equals("director"))
 						            			{
 						            				xmlsr.next();
-						            				
-						            				//System.out.println("un directeur : " + xmlsr.getText() );
-						            				//directors.add(new Personne(xmlsr.getText(),Job.actor));
-						            				//TODO
+						            				ArrayList<Job> jobDirector = new ArrayList<Job>();
+						            				jobDirector.add(Job.director);
+						            				directors.add(new Personne(xmlsr.getText(),jobDirector));
+
 						            			}
 							            	}
 					            		}
@@ -328,7 +330,6 @@ public class Parser {
 		
 		// ajout de l'emission dans la hashmap des dates
 		
-		ArrayList<Emission> cpHMDate;
 
 		//Start Date
 		
@@ -381,14 +382,44 @@ public class Parser {
 		lists.emissionEnd.put(dateEnd, emissionToAdd);
 		
 		// ajouts actors
+		if(!emissionToAdd.getActors().isEmpty())
+		{
+			for (Personne p : emissionToAdd.getActors())
+			{
+				if(!lists.listOfActors.containsKey(p.getName()))
+				{
+					lists.listOfActors.put(p.getName(), p);
+				}
+				lists.listOfActors.get(p.getName()).addEmission(emissionToAdd);
+			}
+		}
 		
 		
 		
 		// ajout directors
+		if(!emissionToAdd.getDirectors().isEmpty())
+		{
+			for (Personne p : emissionToAdd.getDirectors())
+			{
+				System.out.println(p.getName() + "\n");
+				System.out.println(lists.listOfDirectors.containsKey(p.getName()) + "\n");
+				if(lists.listOfDirectors.containsKey(p.getName()) == false)
+				{
+					System.out.println("je vais ");
+					lists.listOfDirectors.put(p.getName(), p);
+				}
+				System.out.println(lists.listOfDirectors.containsKey(p.getName()) + "\n");
+				lists.listOfDirectors.get(p.getName()).addEmission(emissionToAdd);
+			}	
+		}
+		
+		
+
 		
 		// ajout type a la treemap type
 		
 		// ajout de mots clés dans hashmap dictionnaire
 		
 	}
+
 }
