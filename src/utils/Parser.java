@@ -7,7 +7,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.TreeMap;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
@@ -20,18 +19,6 @@ import prog.Personne;
 
 public class Parser {
 	private String pathToXML;
-	public int nbOfChannels;
-	
-	public HashMap<Integer, Channel> ChannelsList = new HashMap<Integer, Channel>();
-	public ArrayList<Emission> EmissionList = new ArrayList<Emission>();
-	
-	private HashMap<String, ArrayList<Emission>> DictionnaryList;
-	private HashMap<Date, ArrayList<Emission>> ProgramOfADay;
-	
-	private ArrayList<Date> DaysOfPrograms;
-	
-	private TreeMap nbEmissionByType;
-	
 	//GETTER SETTERS
 	public void setPath(String path)
 	{
@@ -46,11 +33,14 @@ public class Parser {
 	
 	public Parser()
 	{
-		this.nbOfChannels = 0;
+	}
+	public Parser(String pathToXML)
+	{
+		this.pathToXML = pathToXML;
 	}
 	
 	//CLASSIC METHODS
-	public boolean parse()
+	public boolean parse(Lists lists)
 	{
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 		
@@ -112,7 +102,7 @@ public class Parser {
 				  		if(type.equals("channel"))
 				  		{
 				  			
-				  			nbOfChannels++;
+				  			lists.nbOfChannels++;
 				  			actualChannel = new Channel();
 				  			
 				  			id = xmlsr.getAttributeValue(null, "id");
@@ -153,9 +143,11 @@ public class Parser {
 				            }
 				            //System.out.println(actualChannel.toString() + " [-] source "+ actualChannel.pathToIcon);
 				            
-				            //Ajouter dans une liste
-				            System.out.println(actualChannel.toString());
-				            this.ChannelsList.put(nbOfChannels, actualChannel);
+				            //Ajouter dans l'objet liste
+				            //System.out.println(actualChannel.toString());
+				            
+				            lists.channelsList.put(actualChannel.getId(), actualChannel);
+
 				            
 				  		}
 				  		
@@ -211,9 +203,9 @@ public class Parser {
 							  					+ "\n" + directors.toString()
 							  			);
 							  			*/
-							  			actualEmission = new Emission(date_begin, date_end,channelID,title,desc,length,country,typeOfEmission);
-							  			EmissionList.add(actualEmission);
-				            			
+				            			actualEmission = new Emission(date_begin, date_end,channelID,title,desc,length,country,typeOfEmission);
+				            			addEmissionValuesToLists(actualEmission,lists);
+
 				            			continu = false;
 				            			dateString = "";
 				            			date_begin = null;
@@ -310,23 +302,8 @@ public class Parser {
 				            }
 				            
 				  		}
-				  		
-				  		
 				  		break;
 				  		
-				  		
-				  	// Quezaco ?
-				  	case XMLEvent.END_ELEMENT:
-				  		type = xmlsr.getLocalName();
-				  		if(type.equals("channel"))
-				  		{	
-				  			System.out.println("Fin Channel");
-				  			actualChannel.toString();
-				  			ChannelsList.put(nbOfChannels, actualChannel);
-				  		}
-
-				  		break;
-		  		
 				  	default:
 				  		break;
 				}
@@ -335,17 +312,73 @@ public class Parser {
 			e.printStackTrace();
 			return false;
 		}
-	    System.out.println(this.ChannelsList);
-	    System.out.println(this.ChannelsList.get(1));
-	    
-	    for(int i=1;i<this.ChannelsList.size();i++)
-		{
-			System.out.println(this.ChannelsList.get(i));
-		}
-	    
 	    return true;
 	    
 	    
 	    
+	}
+	
+	@SuppressWarnings("deprecation")
+	private void addEmissionValuesToLists(Emission emissionToAdd, Lists lists)
+	{
+		// ajout de l'emission à la liste des emissions
+		lists.EmissionList.add(emissionToAdd);
+		// ajout de l'emission dans la hashmap des dates
+		
+		ArrayList<Emission> cpHMDate;
+
+		//Start Date
+		
+		Date dateStart = emissionToAdd.getDateStart();
+		System.out.println("Date deb : " + dateStart);
+		Date dateEnd = emissionToAdd.getDateEnd();
+		
+		Date dateAtZero = new Date(dateStart.getTime());
+		dateAtZero.setHours(0);
+		dateAtZero.setMinutes(0);
+		dateAtZero.setSeconds(0);
+		
+		
+		System.out.println("Date parse : " + dateAtZero);
+		
+
+		if(lists.programOfADay.get(dateAtZero) == null)
+		{
+			lists.programOfADay.put(dateAtZero, new ArrayList<Emission>());
+		}
+		
+		lists.programOfADay.get(dateAtZero).add(emissionToAdd);
+
+		//End Date
+		
+		dateAtZero = new Date(dateEnd.getTime());
+		dateAtZero.setHours(0);
+		dateAtZero.setMinutes(0);
+		dateAtZero.setSeconds(0);
+		
+		if(lists.programOfADay.get(dateAtZero) == null)
+		{
+			lists.programOfADay.put(dateAtZero, new ArrayList<Emission>());
+		}
+		
+		if(!lists.programOfADay.get(dateAtZero).contains(emissionToAdd))
+		{
+			lists.programOfADay.get(dateAtZero).add(emissionToAdd);
+		}
+		
+		
+		
+		// ajout de l'emission dans treemap debut
+		
+		// ajout de l'emission dans treemap fin
+		
+		// ajouts actors
+		
+		// ajout directors
+		
+		// ajout type a la treemap type
+		
+		// ajout de mots clés dans hashmap dictionnaire
+		
 	}
 }

@@ -50,9 +50,19 @@ public class Emission {
 		actors.add(p);
 	}
 	
+	public Date getDateStart()
+	{
+		return date_begin;
+	}
+	public Date getDateEnd()
+	{
+		return date_end;
+	}
+	
 	public String toString()
 	{
-		String str = " ---- [EMISSION] ---- ";
+		
+		String str = "\n ---- [EMISSION] ---- ";
 		str += "\n - Titre : "+this.title;
 		str += "\n - Channel  "+this.channel.toString();
 		
