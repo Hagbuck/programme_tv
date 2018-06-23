@@ -15,6 +15,7 @@ import javax.xml.stream.events.XMLEvent;
 
 import prog.Channel;
 import prog.Emission;
+import prog.Job;
 import prog.Personne;
 
 public class Parser {
@@ -268,6 +269,7 @@ public class Parser {
 						            			else if (xmlsr.getLocalName().equals("director"))
 						            			{
 						            				xmlsr.next();
+						            				
 						            				//System.out.println("un directeur : " + xmlsr.getText() );
 						            				//directors.add(new Personne(xmlsr.getText(),Job.actor));
 						            				//TODO
@@ -323,6 +325,7 @@ public class Parser {
 	{
 		// ajout de l'emission à la liste des emissions
 		lists.EmissionList.add(emissionToAdd);
+		
 		// ajout de l'emission dans la hashmap des dates
 		
 		ArrayList<Emission> cpHMDate;
@@ -330,8 +333,9 @@ public class Parser {
 		//Start Date
 		
 		Date dateStart = emissionToAdd.getDateStart();
-		System.out.println("Date deb : " + dateStart);
+
 		Date dateEnd = emissionToAdd.getDateEnd();
+		
 		
 		Date dateAtZero = new Date(dateStart.getTime());
 		dateAtZero.setHours(0);
@@ -339,7 +343,7 @@ public class Parser {
 		dateAtZero.setSeconds(0);
 		
 		
-		System.out.println("Date parse : " + dateAtZero);
+
 		
 
 		if(lists.programOfADay.get(dateAtZero) == null)
@@ -369,10 +373,16 @@ public class Parser {
 		
 		
 		// ajout de l'emission dans treemap debut
+		lists.emissionBegin.put(dateStart, emissionToAdd);
+		
 		
 		// ajout de l'emission dans treemap fin
 		
+		lists.emissionEnd.put(dateEnd, emissionToAdd);
+		
 		// ajouts actors
+		
+		
 		
 		// ajout directors
 		

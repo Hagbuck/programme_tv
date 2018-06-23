@@ -1,9 +1,5 @@
 package tets;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import prog.*;
 import utils.*;
 
@@ -16,21 +12,25 @@ public class Tests {
 		Lists myLists = new Lists();
 		myParser.parse(myLists);
 	
-		System.out.println();
-		System.out.println("---- Affichage du nombre de Channels ----");
+
+		System.out.println("\n\n---- Affichage du nombre de Channels ----");
 		System.out.println(myLists.nbOfChannels);
 		
-		System.out.println();
-		System.out.println("---- Affichage des Channels ----");
+		System.out.println("\n\n---- Affichage des Channels ----");
 		System.out.println(myLists.channelsList);
 		
-		System.out.println();
-		System.out.println("---- Affichage des Emissions ----");
+		System.out.println("\n\n---- Affichage des Emissions ----");
 		System.out.println(myLists.EmissionList);
 		
-		System.out.println();
-		System.out.println("---- Affichage des emissions par date ----");
+		System.out.println("\n\n---- Affichage des emissions par date ----");
 		System.out.println(myLists.programOfADay);
+		
+		System.out.println("\n\n---- Affichage treemap date debut ----");
+		System.out.println(myLists.emissionBegin);
+		
+		System.out.println("\n\n---- Affichage treemap date fin ----");
+		System.out.println(myLists.emissionEnd);
+		
 		
 
 	}
