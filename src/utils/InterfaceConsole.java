@@ -3,21 +3,31 @@ package utils;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+
+import prog.*;
 
 public class InterfaceConsole {
 	
 	// static liste
 	private static boolean run = false;
+	private static Lists inputLists;
+	private static BufferedReader buf ;
 	
-	public static void initConsole() throws IOException //Passé liste en paramètre
+	public static void initConsole(Lists p_lists) throws IOException //Passé liste en paramètre
 	{
-		BufferedReader buf = new BufferedReader(new InputStreamReader(System.in));
+		inputLists = p_lists;
+		
+		buf = new BufferedReader(new InputStreamReader(System.in));
 		run = true;
 		
 		
 		while(run == true)
 		{
-			System.out.println("===================== \nEntrez une commande \n=====================" );
+			System.out.println(" ===> Entrez une commande" );
 			String s = buf.readLine();
 			run = readMessage(s);
 		}
@@ -25,7 +35,7 @@ public class InterfaceConsole {
 		
 	}
 	
-	public static boolean readMessage(String command)
+	public static boolean readMessage(String command) throws IOException
 	{
 		switch (command) {
 		case "help":
@@ -36,6 +46,37 @@ public class InterfaceConsole {
 			System.out.println("1...2...3... Test : Ok !");
 			return true;
 
+		case "1" :
+		case "channels" :
+			System.out.println("============================================");
+			getListChannels();
+			System.out.println("============================================");
+			return true;
+			
+		case "2" :
+			System.out.println("============================================");
+			getDaysWithProgramation();
+			System.out.println("============================================");
+			return true;
+			
+		case "3" : 
+			System.out.println("============================================");
+			
+			//Sasie & controle de la date
+			System.out.println("===> Entrez une date (MM/JJ/AAAA) ");
+			String str_date = buf.readLine();
+			Date temp = parseDate(str_date);
+			
+			//Si la date n'est pas valide
+			if(temp.equals(new Date(0,0,0)))
+				logMsg("ERROR", "Date entrée non valide. Syntax : MM/JJ/AAAA");
+			else
+				getdailyProgramation(new Date());
+			
+			//Fin
+			System.out.println("============================================");
+			return true;
+			
 		case "exit" : 
 			System.out.println("Fermeture de l'application. Merci de votre utilisation.");
 			return false;
@@ -50,10 +91,90 @@ public class InterfaceConsole {
 	
 	private static void getListChannels()
 	{
+
+		HashMap<String,Channel> chanList = inputLists.channelsList;
 		
+		//Liste Vide
+		if(chanList.size() == 0)
+			logMsg("INFO", "Aucune chaîne n'est connue par le systême.");
 		
+		//Au - un élément
+		else
+		{
+			Iterator it = chanList.keySet().iterator();
+			int i = 0;
+			while(it.hasNext())
+			{
+				String key = (String) it.next();
+				System.out.println("["+i+"]" + chanList.get(key).toString());
+				i++;
+			}			
+		}
 	}
 	
+	private static void getdailyProgramation(Date date)
+	{
+		HashMap<Date, ArrayList<Emission>> dayWithProgramation = inputLists.programOfADay;
+		//Date existe dans la liste
+		if(dayWithProgramation.containsKey(date))
+		{
+			for(int i=0;i<dayWithProgramation.get(date).size();i++)
+				System.out.println(dayWithProgramation.get(date).get(i).toString());
+		}
+		//Liste Vide ou pas de programme pour le jour donné.
+		else
+			logMsg("INFO","Aucune programmation pour le jour donné.");		
+	}
+	
+	private static void getDaysWithProgramation()
+	{
+		HashMap<Date, ArrayList<Emission>> dayWithProgramation = inputLists.programOfADay;
+		
+		//Si liste vide
+		if(dayWithProgramation.size() == 0)
+			logMsg("INFO", "Pas de date avec une programmation connue par le systême.");
+			
+		else
+		{
+			Iterator it = dayWithProgramation.keySet().iterator();
+			while(it.hasNext())
+			{
+				Date key = (Date) it.next();
+				System.out.println(key.toString());
+			}			
+		}
+	}
+	
+	
+	private static void logMsg(String type,String str)
+	{
+		System.out.println("["+type+"] - "+str);
+	}
+	
+	private static Date parseDate(String str_date)
+	{
+		String [] splitDate = str_date.split("/");
+		
+		if(splitDate.length == 3 )
+		{
+			int mois = Integer.parseInt(splitDate[0]);
+			int jour = Integer.parseInt(splitDate[1]);
+			int an = Integer.parseInt(splitDate[2]);
+			
+			if(mois < 0 || mois > 12)
+				return new Date(0,0,0);
+			else if(jour < 0 || jour > 31)
+				return new Date(0,0,0);
+			else if(splitDate[2].length() != 4)
+				return new Date(0,0,0);
+			else
+				return new Date(an,mois,jour);
+			
+		}
+		
+		else
+			return new Date(0,0,0);
+	}
 	
 
 }
