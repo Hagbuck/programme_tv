@@ -13,9 +13,10 @@ public class Tests {
 
 		System.out.println(myParser.nbOfChannels);
 
-		for(int i=0;i<myParser.EmissionList.size();i++)
+		System.out.println(myParser.EmissionList);
+		for(int i=1;i<myParser.EmissionList.size();i++)
 		{
-			System.out.println(myParser.EmissionList.get(i).toString());
+			System.out.println(myParser.EmissionList.get(i));
 		}
 		
 	}

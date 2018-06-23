@@ -22,7 +22,6 @@ public class Parser {
 	private String pathToXML;
 	public int nbOfChannels;
 	
-	
 	public HashMap<Integer, Channel> ChannelsList = new HashMap<Integer, Channel>();
 	public ArrayList<Emission> EmissionList = new ArrayList<Emission>();
 	
@@ -155,8 +154,9 @@ public class Parser {
 				            //System.out.println(actualChannel.toString() + " [-] source "+ actualChannel.pathToIcon);
 				            
 				            //Ajouter dans une liste
-				            //System.out.println(actualChannel.toString());
+				            System.out.println(actualChannel.toString());
 				            this.ChannelsList.put(nbOfChannels, actualChannel);
+				            
 				  		}
 				  		
 				  		//PROGRAMME
@@ -335,7 +335,17 @@ public class Parser {
 			e.printStackTrace();
 			return false;
 		}
+	    System.out.println(this.ChannelsList);
+	    System.out.println(this.ChannelsList.get(1));
+	    
+	    for(int i=1;i<this.ChannelsList.size();i++)
+		{
+			System.out.println(this.ChannelsList.get(i));
+		}
+	    
 	    return true;
+	    
+	    
 	    
 	}
 }
