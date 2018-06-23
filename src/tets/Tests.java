@@ -11,7 +11,7 @@ public class Tests {
 		myParser.setPath("ptv.xml");
 		Lists myLists = new Lists();
 		myParser.parse(myLists);
-	
+		
 
 		System.out.println("\n\n---- Affichage du nombre de Channels ----");
 		System.out.println(myLists.nbOfChannels);
@@ -38,6 +38,10 @@ public class Tests {
 		
 		System.out.println("\n\n---- Affichage liste globale directeurs ----");
 		System.out.println(myLists.listOfDirectors);
+		
+		System.out.println("\n\n---- Affichage treemap types ----");
+		System.out.println(myLists.nbEmissionByType);
+
 
 		System.out.println("\n\n---- Test actors / director ----");
 		System.out.println(myLists.listOfDirectors.get("Brannon Braga").getNbPlayedEmission());

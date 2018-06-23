@@ -12,7 +12,8 @@ import prog.Personne;
 public class Lists {
 	public int nbOfChannels;
 	//I)
-	public HashMap<String, Channel> channelsList;
+	public ArrayList<Channel> channelsList;
+
 	//III)
 	public HashMap<Date, ArrayList<Emission>> programOfADay;
 	//V)
@@ -33,8 +34,8 @@ public class Lists {
 	
 	public Lists()
 	{
-		this.channelsList 		= new HashMap<String, Channel>(); 
-		this.programOfADay 		=  new HashMap<Date, ArrayList<Emission>>();
+		this.channelsList 		= new ArrayList<Channel>(); 
+		this.programOfADay 		= new HashMap<Date, ArrayList<Emission>>();
 		this.emissionBegin 		= new TreeMap<Date,Emission>();
 		this.emissionEnd 		= new TreeMap<Date,Emission>();
 		this.listOfActors		= new HashMap<String,Personne>();

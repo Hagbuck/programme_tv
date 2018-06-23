@@ -69,6 +69,10 @@ public class Emission {
 	{
 		return this.actors;
 	}
+	public String getType()
+	{
+		return this.type;
+	}
 	public String toString()
 	{
 		

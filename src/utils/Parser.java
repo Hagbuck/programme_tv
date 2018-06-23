@@ -6,7 +6,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
@@ -148,8 +147,8 @@ public class Parser {
 				            //Ajouter dans l'objet liste
 				            //System.out.println(actualChannel.toString());
 				            
-				            lists.channelsList.put(actualChannel.getId(), actualChannel);
 
+				            lists.channelsList.add(actualChannel);
 				            
 				  		}
 				  		
@@ -283,7 +282,9 @@ public class Parser {
 					            	else if (xmlsr.getLocalName().equals("category"))
 					            	{
 					            		xmlsr.next();
-					            		typeOfEmission = xmlsr.getText();
+					            		String[] catTab;
+					            		catTab = xmlsr.getText().split(" ");
+					            		typeOfEmission = catTab[0];
 					            	}
 					            	else if (xmlsr.getLocalName().equals("length"))
 					            	{
@@ -401,14 +402,10 @@ public class Parser {
 		{
 			for (Personne p : emissionToAdd.getDirectors())
 			{
-				System.out.println(p.getName() + "\n");
-				System.out.println(lists.listOfDirectors.containsKey(p.getName()) + "\n");
 				if(lists.listOfDirectors.containsKey(p.getName()) == false)
 				{
-					System.out.println("je vais ");
 					lists.listOfDirectors.put(p.getName(), p);
 				}
-				System.out.println(lists.listOfDirectors.containsKey(p.getName()) + "\n");
 				lists.listOfDirectors.get(p.getName()).addEmission(emissionToAdd);
 			}	
 		}
@@ -417,6 +414,13 @@ public class Parser {
 
 		
 		// ajout type a la treemap type
+		if(!lists.nbEmissionByType.containsKey(emissionToAdd.getType()))
+		{
+			lists.nbEmissionByType.put(emissionToAdd.getType(), 1);
+		}
+		else {
+			lists.nbEmissionByType.put(emissionToAdd.getType(), lists.nbEmissionByType.get(emissionToAdd.getType()) +1 );
+		}
 		
 		// ajout de mots clés dans hashmap dictionnaire
 		
