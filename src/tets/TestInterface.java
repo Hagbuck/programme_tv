@@ -1,4 +1,4 @@
-package tets;
+/*package tets;
 import java.io.IOException;
 
 import utils.InterfaceConsole;
@@ -25,3 +25,4 @@ public class TestInterface {
 		
 	}
 }
+*/
