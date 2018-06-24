@@ -17,6 +17,7 @@ public class TestInterface {
 			myParser.parse(myLists);
 			
 			InterfaceConsole.initConsole(myLists);
+			
 		} 
 		catch (IOException e) {
 			// TODO Auto-generated catch block

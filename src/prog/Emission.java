@@ -89,5 +89,16 @@ public class Emission {
 		return str;
 		
 	}
+	
+	public String display()
+	{		
+		String str = " ---- [EMISSION] ---- ";
+		str += "\n - Titre : "+this.title;
+		str += "\n - Channel  "+this.channel.toString();
+		str += "\n - Type : "+this.type;
+		str += "\n Description : "+desc;
+		
+		return str;		
+	}
 
 }
