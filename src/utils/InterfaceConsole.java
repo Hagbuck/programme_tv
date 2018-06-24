@@ -3,6 +3,8 @@ package utils;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -45,20 +47,30 @@ public class InterfaceConsole {
 		String [] splitCommand = command.split("-");
 		String labelCommand = splitCommand[0].replaceAll("\\s+","");
 		
+		//Selon la commande entrée
 		switch (labelCommand) {
 		
-		//Request HELP
+		
+		/** Request HELP **/
 		case "help":
 			System.out.println("Liste des commandes non disponible.");
 			return true;
 			
-		//Command test interface
+			
+			
+			
+		/** Commande de test **/
 		case "test" : 
 			System.out.println("1...2...3... Test : Ok !");
 			return true;
 
-		//Display all channels
-		case "1" :
+			
+			
+			
+		/** Affiche des infos sur les chaines **/
+		// "chan" : Affiche toute les chaines connues
+		// "chan - [NAME] : Donne la programmation de toute la chaine [NAME]
+		// "chan - [NAME] - [DATE] : Donne la programmation de la chaine [NAME] pour la date [DATE]
 		case "chan" :
 			System.out.println("============================================");
 			
@@ -68,57 +80,50 @@ public class InterfaceConsole {
 			else if(splitCommand.length == 2)
 				getProgChannel(splitCommand[1].replaceAll("\\s+",""));
 			
-			/*
-			else if(splitCommand.length == 3)
-				getProgramationByChannel()
-				*/
 			
+			else if(splitCommand.length == 3)
+			{
+				try 
+				{
+					getProgChannelByDate(splitCommand[1].replaceAll("\\s+",""),splitCommand[2].replaceAll("\\s+",""));
+				} 
+				catch (ParseException e)
+				{
+					e.printStackTrace();
+				}	
+			}
+					
 			
 			System.out.println("============================================");
 			return true;
 			
-		//Display day with a programmation
-		case "2" :
+		
+			
+		/** Affiche les jours comportant un programme **/
 		case "when":
 			System.out.println("============================================");
 			getDaysWithProgramation();
 			System.out.println("============================================");
 			return true;
+			
 		
-		//TODO
-		case "3" :
-		case "what":
-			System.out.println("============================================");
 			
-			//Sasie & controle de la date
-			System.out.println("===> Entrez une date (MM/JJ/AAAA) ");
-			String str_date = buf.readLine();
-			Date temp = parseDate(str_date);
-			
-			//Si la date n'est pas valide
-			if(temp.equals(new Date(0,0,0)))
-				logMsg("ERROR", "Date entrée non valide. Syntax : MM/JJ/AAAA");
-			
-			/*else
-				getdailyProgramation(new Date());
-			*/
-			
-			//Fin
-			System.out.println("============================================");
-			return true;
-			
-		//Exit application
+		/** Quitte l'application **/
 		case "exit" : 
 			System.out.println("Fermeture de l'application. Merci de votre utilisation.");
 			return false;
+			
 		
-		//Display type and movies number of this type
-		case "chan_by_type" : 
+		/** Affiche les emissions par type trié par ordre croissant **/
+		case "emission_by_type" : 
 			System.out.println("============================================");
 			getNbEmissionByType();
 			System.out.println("============================================");
 			return true;
 		
+		/** Affiche des informations sur les acteurs **/
+		// "actor" : Affiche tout les acteurs
+		// "actor - [NAME]" : Affiche les émissions dans lequelle joue l'acteur
 		case "actor" :
 			System.out.println("============================================");
 			
@@ -132,6 +137,10 @@ public class InterfaceConsole {
 			System.out.println("============================================");
 			return true;
 		
+			
+		/** Affiche des informations sur les directeurs **/
+		// "director" : Affiche tout les acteurs
+		// "director - [NAME]" : Affiche les émissions dans lequelle joue l'acteur
 		case "director":
 			System.out.println("============================================");
 			
@@ -144,7 +153,9 @@ public class InterfaceConsole {
 			
 			System.out.println("============================================");
 			return true;
+		
 			
+		/** Fonction de recherche du systeme **/
 		case "search": 
 			System.out.println("============================================");
 	
@@ -152,7 +163,9 @@ public class InterfaceConsole {
 			
 			System.out.println("============================================");
 			return true;
+			
 		
+		/** Commande non reconnue par le systeme **/
 		default:
 			System.out.println("Commande inconnue.");
 			return true;
@@ -189,10 +202,31 @@ public class InterfaceConsole {
 	 * Display Programmation for one day and a specific channel
 	 * TODO
 	 * @param id Id of the channel
+	 * @throws ParseException 
 	 */
-	private static void getProgramationByChannel(String id)
+	private static void getProgChannelByDate(String param,String date) throws ParseException
 	{
-
+		Date d = parseDate(date);
+		System.out.println(d);
+		
+		if(!d.equals(new Date(0,0,0)))
+		{
+			for(Channel c : inputLists.channelsList)
+			{
+				if(c.getName().equals(param))
+				{
+					//System.out.println("\n-- Programmation de " + c.getName() +"\n" + c.programOfADay);
+					Set<Date> keys = c.programOfADay.keySet();
+					for(Date key : keys)
+						if(key.equals(d))
+							System.out.println(c.programOfADay.get(d));
+				}
+					
+			}
+		}
+		
+		else
+			System.out.println("Invalid Date dd/MM/YYYY");
 	}
 	
 	
@@ -354,30 +388,35 @@ public class InterfaceConsole {
 	 * Parse un string pour contenir une date
 	 * @param str_date String de date
 	 * @return Date vide si parametre erronée sinon la date associée.
+	 * @throws ParseException 
 	 */
-	private static Date parseDate(String str_date)
+	private static Date parseDate(String str_date) throws ParseException
 	{
 		String [] splitDate = str_date.split("/");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		
 		if(splitDate.length == 3 )
 		{
-			int mois = Integer.parseInt(splitDate[0]);
-			int jour = Integer.parseInt(splitDate[1]);
+			int jour = Integer.parseInt(splitDate[0]);
+			int mois = Integer.parseInt(splitDate[1]);
 			int an = Integer.parseInt(splitDate[2]);
 			
 			if(mois < 0 || mois > 12)
-				return new Date(0,0,0);
+				return sdf.parse("00/00/0000");
 			else if(jour < 0 || jour > 31)
-				return new Date(0,0,0);
+				return sdf.parse("00/00/00");
 			else if(splitDate[2].length() != 4)
-				return new Date(0,0,0);
+				return sdf.parse("00/00/0000");
 			else
-				return new Date(an,mois,jour);
-			
+			{
+				
+				return sdf.parse(str_date);
+			}
+
 		}
 		
 		else
-			return new Date(0,0,0);
+			return sdf.parse("00/00/0000");
 	}
 	
 }
