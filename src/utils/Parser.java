@@ -228,13 +228,6 @@ public class Parser {
 				            	xmlsr.next();
 				            	if (xmlsr.isStartElement())
 				            	{
-
-				            		/*
-				            		private ArrayList<Personne> actors;
-				            		private ArrayList<Personne> director;
-				            		*/
-				            		
-				            		
 				            		if(xmlsr.getLocalName().equals("title"))
 					            	{
 					            		xmlsr.next();
@@ -347,8 +340,6 @@ public class Parser {
 		
 
 		//ajout dans channel de l'emission a la date begin
-		//determiner l'id de la chaine
-		//
 		int indexOfChannel = lists.channedID.get(emissionToAdd.getChannelID());
 		lists.channelsList.get(indexOfChannel).addEmission(dateAtZero, emissionToAdd);
 		
@@ -421,8 +412,8 @@ public class Parser {
 		}
 		
 		// ajout de mots clés dans hashmap dictionnaire
-		String[] allDesc = emissionToAdd.getDesc().split(" ");
-		String[] badWords = {"le","la","les","sur","une","un","de","du","par","au","a","et","-",":"};
+		String[] allDesc = emissionToAdd.getDesc().split("['.,:-]|\\s");
+		String[] badWords = {"le","la","les","sur","une","un","de","des","du","par","au","a","et","l","n","s","d","ses","se","sa","c","il","elle","elles","ils"};
 		boolean badWord = false;
 		for (String s : allDesc)
 		{
@@ -445,11 +436,7 @@ public class Parser {
 					lists.DictionnaryList.get(s).add(emissionToAdd);
 				}
 			}
-			badWord = false;
-			
-			
-		}
-		
+			badWord = false;	
+		}	
 	}
-
 }
