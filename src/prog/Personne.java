@@ -7,7 +7,7 @@ public class Personne {
 
 	private String fullName;
 	private ArrayList<Job> jobs;
-	private ArrayList<Emission> playedEmission;
+	public ArrayList<Emission> playedEmission;
 	
 	
 	public Personne(String p_fname,ArrayList<Job> p_jobs)
