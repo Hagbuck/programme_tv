@@ -360,6 +360,13 @@ public class Parser {
 		dateAtZero.setMinutes(0);
 		dateAtZero.setSeconds(0);
 		
+		
+		if(!lists.daysOfPrograms.contains(dateAtZero)) 
+		{
+			lists.daysOfPrograms.add(dateAtZero);
+		}
+		
+		
 		//ajout dans channel de l'emission a la date end
 		lists.channelsList.get(indexOfChannel).addEmission(dateAtZero, emissionToAdd);
 		
@@ -414,6 +421,34 @@ public class Parser {
 		}
 		
 		// ajout de mots clés dans hashmap dictionnaire
+		String[] allDesc = emissionToAdd.getDesc().split(" ");
+		String[] badWords = {"le","la","les","sur","une","un","de","du","par","au","a","et","-",":"};
+		boolean badWord = false;
+		for (String s : allDesc)
+		{
+			for(String bw : badWords)
+			{
+				if(bw.equalsIgnoreCase(s))
+				{
+					badWord = true;
+					break;
+				}
+			}
+			if(!badWord)
+			{
+				if(lists.DictionnaryList.get(s) == null)
+				{
+					lists.DictionnaryList.put(s,new ArrayList<Emission>());
+				}
+				if(!lists.DictionnaryList.get(s).contains(emissionToAdd))
+				{
+					lists.DictionnaryList.get(s).add(emissionToAdd);
+				}
+			}
+			badWord = false;
+			
+			
+		}
 		
 	}
 

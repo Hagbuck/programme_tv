@@ -8,8 +8,9 @@ public class Tests {
 	public static void main(String[] args) {
 		
 		Parser myParser = new Parser();
-		myParser.setPath("ptv.xml");
 		Lists myLists = new Lists();
+		
+		myParser.setPath("ptv.xml");
 		myParser.parse(myLists);
 		
 
@@ -46,6 +47,10 @@ public class Tests {
 		System.out.println("\n\n---- Test actors / director ----");
 		System.out.println(myLists.listOfDirectors.get("Brannon Braga").getNbPlayedEmission());
 		System.out.println(myLists.listOfActors.get("Alexandra Conunova (violon)").getNbPlayedEmission());
+		
+		
+		System.out.println("\n\n---- Affichage Dictionnaire ----");
+		System.out.println(myLists.DictionnaryList);
 		
 		
 	}

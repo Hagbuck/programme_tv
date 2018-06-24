@@ -74,7 +74,10 @@ public class Emission {
 	{
 		return this.channel;
 	}
-	
+	public String getDesc()
+	{
+		return this.desc;
+	}
 	
 	public String toString()
 	{
