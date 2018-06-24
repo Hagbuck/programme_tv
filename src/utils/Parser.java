@@ -149,7 +149,7 @@ public class Parser {
 				            
 
 				            lists.channelsList.add(actualChannel);
-				            
+				            lists.channedID.put(actualChannel.getId(), lists.channelsList.indexOf(actualChannel));
 				  		}
 				  		
 				  		//PROGRAMME
@@ -326,12 +326,7 @@ public class Parser {
 	@SuppressWarnings("deprecation")
 	private void addEmissionValuesToLists(Emission emissionToAdd, Lists lists)
 	{
-		// ajout de l'emission à la liste des emissions
-		lists.EmissionList.add(emissionToAdd);
-		
-		// ajout de l'emission dans la hashmap des dates
-		
-
+		// ajout de l'emission dans la hashmap des dates dans les channels
 		//Start Date
 		
 		Date dateStart = emissionToAdd.getDateStart();
@@ -344,16 +339,19 @@ public class Parser {
 		dateAtZero.setMinutes(0);
 		dateAtZero.setSeconds(0);
 		
-		
-
-		
-
-		if(lists.programOfADay.get(dateAtZero) == null)
+		//ajout liste des dates globales
+		if(!lists.daysOfPrograms.contains(dateAtZero)) 
 		{
-			lists.programOfADay.put(dateAtZero, new ArrayList<Emission>());
+			lists.daysOfPrograms.add(dateAtZero);
 		}
 		
-		lists.programOfADay.get(dateAtZero).add(emissionToAdd);
+
+		//ajout dans channel de l'emission a la date begin
+		//determiner l'id de la chaine
+		//
+		int indexOfChannel = lists.channedID.get(emissionToAdd.getChannelID());
+		lists.channelsList.get(indexOfChannel).addEmission(dateAtZero, emissionToAdd);
+		
 
 		//End Date
 		
@@ -362,15 +360,8 @@ public class Parser {
 		dateAtZero.setMinutes(0);
 		dateAtZero.setSeconds(0);
 		
-		if(lists.programOfADay.get(dateAtZero) == null)
-		{
-			lists.programOfADay.put(dateAtZero, new ArrayList<Emission>());
-		}
-		
-		if(!lists.programOfADay.get(dateAtZero).contains(emissionToAdd))
-		{
-			lists.programOfADay.get(dateAtZero).add(emissionToAdd);
-		}
+		//ajout dans channel de l'emission a la date end
+		lists.channelsList.get(indexOfChannel).addEmission(dateAtZero, emissionToAdd);
 		
 		
 		

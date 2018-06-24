@@ -19,11 +19,11 @@ public class Tests {
 		System.out.println("\n\n---- Affichage des Channels ----");
 		System.out.println(myLists.channelsList);
 		
-		System.out.println("\n\n---- Affichage des Emissions ----");
-		System.out.println(myLists.EmissionList);
-		
-		System.out.println("\n\n---- Affichage des emissions par date ----");
-		System.out.println(myLists.programOfADay);
+		System.out.println("\n\n---- Affichage des emissions par chaine et par date ----");
+		for(Channel c : myLists.channelsList)
+		{
+			System.out.println("\n-- Programmation de " + c.getName() +"\n" + c.programOfADay);
+		}
 		
 		System.out.println("\n\n---- Affichage treemap date debut ----");
 		System.out.println(myLists.emissionBegin);

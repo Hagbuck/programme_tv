@@ -5,25 +5,21 @@ import java.util.Date;
 
 public class Emission {
 	
-	private Date date_begin;
-	private Date date_end;
-	//private Channel channel; A DISCUTER
-	private String title;
-	private String desc;
-	
+	private String 				title;
+	private String 				desc;
+	private Date 				date_begin;
+	private Date 				date_end;
+	private int 				length;
+	private String 				unitOfLength;
+	private String 				channel;
+	private String 				country;
+	private String 				type;
+	private String 				pathToIcon;
 	private ArrayList<Personne> actors;
-	private int length;
-	private String country;
-	private String type;
+	private ArrayList<Personne> directors;	
+	
+	//private Channel channel; A DISCUTER
 
-	//added
-	public 	String pathToIcon;
-	private String unitOfLength;
-	
-	//changed
-	private String channel;
-	private ArrayList<Personne> directors;
-	
 	public Emission()
 	{
 		
@@ -42,6 +38,7 @@ public class Emission {
 		this.actors = actors;
 		this.directors = directors;
 	}
+	
 	
 	public void addDirector(Personne p)
 	{
@@ -73,6 +70,12 @@ public class Emission {
 	{
 		return this.type;
 	}
+	public String getChannelID()
+	{
+		return this.channel;
+	}
+	
+	
 	public String toString()
 	{
 		
