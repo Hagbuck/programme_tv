@@ -52,6 +52,9 @@ public class Tests {
 		System.out.println("\n\n---- Affichage Dictionnaire ----");
 		System.out.println(myLists.DictionnaryList);
 		
+		System.out.println("\n\n---- Affichage TreeMap Personne nb Emission ----");
+		System.out.println(myLists.nbEmissionByActor);
+		
 		
 	}
 

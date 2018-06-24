@@ -15,38 +15,55 @@ public class Lists {
 	public ArrayList<Channel> channelsList;
 	//II)
 	public ArrayList <Date> daysOfPrograms;
-	//III)
-	//public HashMap<Date, ArrayList<Emission>> programOfADay;
 	//V)
 	public TreeMap<Date,Emission> emissionBegin;
 	public TreeMap<Date,Emission> emissionEnd;
 	//VI)
-	
 	public HashMap<String,Personne> listOfActors;
 	public HashMap<String,Personne> listOfDirectors;
-
+	//VII)
+	public TreeMap<String,Integer> nbEmissionByActor;
 	//VIII
 	public TreeMap<String,Integer> nbEmissionByType;
 	//IX
 	public HashMap<String, ArrayList<Emission>> DictionnaryList;
 	//Others
 	public HashMap<String,Integer> channedID;
-	//plus besoin
-	//public ArrayList<Emission> EmissionList;
+
 	
 	
 	public Lists()
 	{
 		this.channelsList 		= new ArrayList<Channel>(); 
 		this.daysOfPrograms		= new ArrayList <Date>();
-		//this.programOfADay 	= new HashMap<Date, ArrayList<Emission>>();
 		this.emissionBegin 		= new TreeMap<Date,Emission>();
 		this.emissionEnd 		= new TreeMap<Date,Emission>();
 		this.listOfActors		= new HashMap<String,Personne>();
 		this.listOfDirectors 	= new HashMap<String,Personne>();
+		this.nbEmissionByActor 	= new TreeMap<String,Integer>();
 		this.nbEmissionByType 	= new TreeMap<String,Integer>();
 		this.DictionnaryList 	= new HashMap<String, ArrayList<Emission>>();
-		//this.EmissionList 	= new ArrayList<Emission>();	
 		this.channedID 			= new HashMap<String,Integer>();
+	}
+	
+	public void triNbEmissionByType()
+	{
+
+		TreeValuesComparator comparateur = new TreeValuesComparator(this.nbEmissionByType);
+		TreeMap<String,Integer> treeMapTriee = new TreeMap<String,Integer>(comparateur);
+		treeMapTriee.putAll(this.nbEmissionByType);
+		this.nbEmissionByType.clear();
+		this.nbEmissionByType = treeMapTriee;
+		
+	}
+	public void triNbEmissionByPersonne()
+	{
+
+		TreeValuesComparator comparateur = new TreeValuesComparator(this.nbEmissionByActor);
+		TreeMap<String,Integer> treeMapTriee = new TreeMap<String,Integer>(comparateur);
+		treeMapTriee.putAll(this.nbEmissionByActor);
+		this.nbEmissionByActor.clear();
+		this.nbEmissionByActor = treeMapTriee;
+		
 	}
 }

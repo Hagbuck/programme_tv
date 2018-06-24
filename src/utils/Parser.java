@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
@@ -310,6 +311,19 @@ public class Parser {
 			e.printStackTrace();
 			return false;
 		}
+	    
+	    lists.triNbEmissionByType();
+	    
+	    	
+	    Iterator<String> i = lists.listOfActors.keySet().iterator();
+	    String k ="";
+	    while(i.hasNext())
+	    {
+	    	k = i.next();
+	    	lists.nbEmissionByActor.put(lists.listOfActors.get(k).getName(), lists.listOfActors.get(k).getNbPlayedEmission());
+	    }
+	    lists.triNbEmissionByPersonne();
+	    
 	    return true;
 	    
 	    
