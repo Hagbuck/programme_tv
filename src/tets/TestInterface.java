@@ -3,6 +3,7 @@ import java.io.IOException;
 
 import utils.InterfaceConsole;
 import utils.Lists;
+import utils.Parser;
 
 public class TestInterface {
 
@@ -10,7 +11,12 @@ public class TestInterface {
 		
 		
 		try {
-			InterfaceConsole.initConsole(new Lists());
+			Parser myParser = new Parser();
+			myParser.setPath("ptv.xml");
+			Lists myLists = new Lists();
+			myParser.parse(myLists);
+			
+			InterfaceConsole.initConsole(myLists);
 		} 
 		catch (IOException e) {
 			// TODO Auto-generated catch block

@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeMap;
+
+import javax.swing.plaf.BorderUIResource.EmptyBorderUIResource;
 
 import prog.*;
 
@@ -37,7 +41,10 @@ public class InterfaceConsole {
 	
 	public static boolean readMessage(String command) throws IOException
 	{
-		switch (command) {
+		String [] splitCommand = command.split("-");
+		String labelCommand = splitCommand[0].replaceAll("\\s+","");
+		
+		switch (labelCommand) {
 		case "help":
 			System.out.println("Liste des commandes non disponible.");
 			return true;
@@ -47,19 +54,29 @@ public class InterfaceConsole {
 			return true;
 
 		case "1" :
-		case "channels" :
+		case "chan" :
 			System.out.println("============================================");
-			getListChannels();
+			
+			if(splitCommand.length == 1)
+				getListChannels();
+			
+			/*
+			else if(splitCommand.length == 3)
+				int i = 1;
+			*/
+			
 			System.out.println("============================================");
 			return true;
 			
 		case "2" :
+		case "when":
 			System.out.println("============================================");
 			getDaysWithProgramation();
 			System.out.println("============================================");
 			return true;
 			
-		case "3" : 
+		case "3" :
+		case "what":
 			System.out.println("============================================");
 			
 			//Sasie & controle de la date
@@ -80,6 +97,12 @@ public class InterfaceConsole {
 		case "exit" : 
 			System.out.println("Fermeture de l'application. Merci de votre utilisation.");
 			return false;
+			
+		case "chan_by_type" : 
+			System.out.println("============================================");
+			getNbEmissionByType();
+			System.out.println("============================================");
+			return true;
 		
 		default:
 			System.out.println("Commande inconnue.");
@@ -177,4 +200,11 @@ public class InterfaceConsole {
 	}
 	
 
+	private static void getNbEmissionByType()
+	{
+		TreeMap<String,Integer> emissionByType = inputLists.nbEmissionByType;
+		Set<String> keys = emissionByType.keySet();
+		for(String key : keys)
+			System.out.println(emissionByType.get(key).toString() + "- ["+key.toString()+"]");
+	}
 }
