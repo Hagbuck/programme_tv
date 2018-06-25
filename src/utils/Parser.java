@@ -2,7 +2,6 @@ package utils;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -215,7 +214,14 @@ public class Parser {
 					            	else if (xmlsr.getLocalName().equals("desc"))
 					            	{
 					            		xmlsr.next();
-					            		desc = xmlsr.getText();
+					            		while(!xmlsr.isEndElement())
+					            		{
+					            			
+					            			desc += xmlsr.getText();
+					            			xmlsr.next();
+					            			
+					            		}
+					            		
 					            	}
 					            	else if (xmlsr.getLocalName().equals("credits"))
 					            	{
