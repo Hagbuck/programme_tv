@@ -1,5 +1,6 @@
 package utils;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.text.ParseException;
@@ -48,9 +49,11 @@ public class Parser {
 		
 		XMLInputFactory xmlif = XMLInputFactory.newInstance();
 		
+		
+		
 	    XMLStreamReader xmlsr;
 		try {
-			xmlsr = xmlif.createXMLStreamReader(new FileReader(this.pathToXML));
+			xmlsr = xmlif.createXMLStreamReader(new FileInputStream(this.pathToXML));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			return false;
@@ -143,11 +146,6 @@ public class Parser {
 				            	}
 				            	
 				            }
-				            //System.out.println(actualChannel.toString() + " [-] source "+ actualChannel.pathToIcon);
-				            
-				            //Ajouter dans l'objet liste
-				            //System.out.println(actualChannel.toString());
-				            
 
 				            lists.channelsList.add(actualChannel);
 				            lists.channedID.put(actualChannel.getId(), lists.channelsList.indexOf(actualChannel));
@@ -159,11 +157,9 @@ public class Parser {
 				  			//exemple date 20180430062500 +0200
 				  			//			  "AAAAMMddHHmmss Z"
 				  			
-				  			//start date / end date / channelID
 				  			try {
 				  				dateString = xmlsr.getAttributeValue(null, "start");
 								date_begin = sdf.parse(dateString.substring(0,13));
-								//TimeZone.getTimeZone("GMT " + dateString.substring(14));
 								
 								dateString = xmlsr.getAttributeValue(null, "stop");
 								date_end = sdf.parse(dateString.substring(0,13));
@@ -175,7 +171,7 @@ public class Parser {
 				  			channelID = xmlsr.getAttributeValue(null, "channel");
 				  			
 				  			
-				  			//title
+
 				  			xmlsr.next();
 				            boolean continu = true;
 				            boolean stillCredits = true;
@@ -187,24 +183,6 @@ public class Parser {
 				            	{
 				            		if(xmlsr.getLocalName().equals("programme")) 
 				            		{
-				            			
-				            			//System.out.println("---- PROGRAM ----\n");
-				            			/*
-							  			System.out.println( 
-							  					  "\n" + date_begin.toString()
-							  					+ "\n" + date_end.toString()
-							  					+ "\n" + channelID
-							  					+ "\n" + title
-							  					+ "\n" + desc
-							  					+ "\n" + length
-							  					+ "\n" + unitOfLength
-							  					+ "\n" + country
-							  					+ "\n" + typeOfEmission
-							  					+ "\n" + pathToIcon
-							  					+ "\n" + actors.toString()
-							  					+ "\n" + directors.toString()
-							  			);
-							  			*/
 				            			actualEmission = new Emission(date_begin, date_end,channelID,title,desc,length,country,typeOfEmission,unitOfLength,pathToIcon,actors,directors);
 				            			addEmissionValuesToLists(actualEmission,lists);
 
