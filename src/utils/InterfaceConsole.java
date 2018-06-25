@@ -54,7 +54,26 @@ public class InterfaceConsole {
 		
 		/** Request HELP **/
 		case "help":
-			System.out.println("Liste des commandes non disponible.");
+			System.out.println("= = = = = = Command List = = = = = = ");
+			System.out.println(" * 'chan' ~ Donne la liste des chaînes connues par le systême.");
+			System.out.println(" * 'chan - [NAME]' ~ Affiche la programmation de la chaine [NAME]");
+			System.out.println(" * 'chan - [NAME] - dd/MM/YYYY'~ Donne la programmation de la chaine [NAME] à la date donnée.");
+			System.out.println(" * 'chan - [NAME] - [DATE] - [ID]' ~ Affiche la fiche de l'émission [ID] appartenant à la chaine [NAME] pour la date [DATE].");
+			System.out.println(" /!\\ * 'rightnow' ~ Donne les émissions en cours actuellement. (Heure du PC) ");
+			System.out.println(" /!\\ * 'rightnow - [DATE]' ~ Donne les émissions en cours à la date [DATE].");
+			System.out.println(" * 'when' ~ Donne les jours aillant une programmation et connue par le systême.");
+			System.out.println(" * 'emission_by_type' ~ Donne les types d'émissions triées par type.");
+			System.out.println(" * 'actor' ~ Donne la liste des acteurs connus par le systême.");
+			System.out.println(" * 'actor - [NAME]' ~ Donne la liste des émissions dans lesquelles joue l'acteur [NAME].");
+			System.out.println(" * 'actor - [NAME] - [ID]' ~ Affiche la fiche de l'émission [ID] de l'acteur [NAME].");
+			System.out.println(" * 'director' ~ Donne la liste des directeurs connus par le systême.");
+			System.out.println(" * 'director - [NAME]' ~ Donne la liste des émissions dirigées par le directeur [NAME].");
+			System.out.println(" * 'director - [NAME] - [ID]' ~ Affiche la fiche de l'émission [ID] du directeur [NAME].");
+			System.out.println(" * 'search - [WORDS]' ~ Recherche la correspondances entre les mots [WORDS] et les émissions connues.");
+			System.out.println(" * 'test' ~ Affichage de test de l'application.");
+			System.out.println(" * 'exit' ~ Quitte l'application.");
+			System.out.println(" * 'deathApp' ~ Supprime l'application et toute ses données. NE PAS UTILISER !!");
+			System.out.println("= = = = = = Fin List = = = = = = ");
 			return true;
 			
 			
@@ -65,7 +84,14 @@ public class InterfaceConsole {
 			System.out.println("1...2...3... Test : Ok !");
 			return true;
 
+		
 			
+		/** Commande de suppression de l'application **/
+		case "deathApp": 
+			logMsg("WARNING", "SUPPRESSION EN COURS.... ");
+			logMsg("INFO", "It's just a joke ! I got you !");
+			return true;
+		
 			
 			
 		/** Affiche des infos sur les chaines **/
@@ -84,14 +110,14 @@ public class InterfaceConsole {
 			
 			else if(splitCommand.length == 3)
 			{
-				try 
-				{
-					getProgChannelByDate(splitCommand[1].replaceAll("\\s+",""),splitCommand[2].replaceAll("\\s+",""));
-				} 
-				catch (ParseException e)
-				{
-					e.printStackTrace();
-				}	
+				try{getProgChannelByDate(splitCommand[1].replaceAll("\\s+",""),splitCommand[2].replaceAll("\\s+",""));} 
+				catch (ParseException e){e.printStackTrace();}	
+			}
+			
+			else if(splitCommand.length == 4)
+			{
+				try {getEmission(splitCommand[1].replaceAll("\\s+",""),splitCommand[2].replaceAll("\\s+",""),splitCommand[3].replaceAll("\\s+",""));} 
+				catch (ParseException e) {e.printStackTrace();}
 			}
 					
 			
@@ -132,6 +158,8 @@ public class InterfaceConsole {
 				getPers("actor");
 			else if(splitCommand.length == 2)
 				getInfoPers("actor",splitCommand[1]);
+			else if(splitCommand.length == 3)
+				getEmissionByPers("actor", splitCommand[1], splitCommand[2].replaceAll("\\s+",""));
 			else
 				System.out.println("Syntax incorecte");
 			
@@ -149,6 +177,8 @@ public class InterfaceConsole {
 				getPers("director");
 			else if(splitCommand.length == 2)
 				getInfoPers("director",splitCommand[1]);
+			else if(splitCommand.length == 3)
+				getEmissionByPers("director", splitCommand[1], splitCommand[2].replaceAll("\\s+",""));
 			else
 				System.out.println("Syntax incorecte");
 			
@@ -208,26 +238,85 @@ public class InterfaceConsole {
 	private static void getProgChannelByDate(String param,String date) throws ParseException
 	{
 		Date d = parseDate(date);
-		System.out.println(d);
+		Date d_cp = d;
+		SimpleDateFormat form= new SimpleDateFormat("'Emission diffusé sur "+param+" ' EEEE d MMM yyyy ");
+		System.out.println(form.format(d_cp));
 		
 		if(!d.equals(new Date(0,0,0)))
 		{
+			boolean find = false;
+			
 			for(Channel c : inputLists.channelsList)
 			{
 				if(c.getName().equals(param))
 				{
-					//System.out.println("\n-- Programmation de " + c.getName() +"\n" + c.programOfADay);
 					Set<Date> keys = c.programOfADay.keySet();
 					for(Date key : keys)
 						if(key.equals(d))
-							System.out.println(c.programOfADay.get(d));
+							for(int i =0 ;i < c.programOfADay.get(d).size();i++ )
+							{
+								find = true;
+								System.out.println(c.programOfADay.get(d).get(i).toString(i));
+							}
 				}
 					
 			}
+			
+			if(!find)
+				logMsg("INFO","Pas correspondance trouvé.");
 		}
 		
 		else
 			System.out.println("Invalid Date dd/MM/YYYY");
+	}
+	
+	
+	/**
+	 * Affiche la fiche de l'émission id de la chaine param pour la date date.
+	 * @param param
+	 * @param date
+	 * @param id
+	 * @throws ParseException
+	 */
+	private static void getEmission(String param,String date,String id) throws ParseException
+	{
+		Date d = parseDate(date);
+		
+		int id_string = Integer.parseInt(id);
+		
+		
+		if(!d.equals(new Date(0,0,0)))
+		{
+			boolean find = false;
+			
+			for(Channel c : inputLists.channelsList)
+			{
+				if(c.getName().equals(param))
+				{
+					if( c.programOfADay.containsKey(d) )
+					{
+						if( id_string < c.programOfADay.size() )
+						{
+							System.out.println(c.programOfADay.get(d).get(id_string).display());
+							find = true;
+						}
+							
+						else
+							logMsg("INFO", "ID Incorrect");
+							
+					}					
+					else
+						logMsg("INFO","Pas de programmation pour la chaîne et le jour donnée.");
+				}
+					
+			}
+			
+			if(!find)
+				logMsg("INFO", "L'émission n'a pas put être trouvé.");
+		}
+		
+		else
+			System.out.println("Invalid Date dd/MM/YYYY");		
 	}
 	
 	
@@ -265,7 +354,7 @@ public class InterfaceConsole {
 	    Iterator iterator = set.iterator();
 	    while(iterator.hasNext()) {
 	         Map.Entry<String,Integer> mapentry = (Map.Entry<String,Integer>)iterator.next();
-	         System.out.print("clé: "+ mapentry.getKey() + "- valeur:" +mapentry.getValue()+"\n");
+	         System.out.print(mapentry.getKey() + " - [" +mapentry.getValue()+"]\n");
 	    }
 	}
 	
@@ -302,7 +391,7 @@ public class InterfaceConsole {
 		{
 			ArrayList<Emission> actorsList = useList.get(param).playedEmission;
 			for(int i=0; i < actorsList.size();i++)
-				System.out.println(actorsList.get(i));
+				System.out.println(actorsList.get(i).toString(i));
 		}
 		
 
@@ -310,12 +399,46 @@ public class InterfaceConsole {
 		{
 			ArrayList<Emission> actorsList = useList.get(param.substring(1)).playedEmission;
 			for(int i=0; i < actorsList.size();i++)
-				System.out.println(actorsList.get(i));
+				System.out.println(actorsList.get(i).toString(i));
 		}
 		
 		else
 			System.out.println("Le "+ pers +" n'est pas connue du systême.");
 
+	}
+	
+	
+	private static void getEmissionByPers(String pers, String param, String id)
+	{
+		HashMap<String,Personne> useList;
+		
+		if(pers == "actor")
+			useList = inputLists.listOfActors;
+		else 
+			useList = inputLists.listOfDirectors;
+		
+		int int_id = Integer.parseInt(id);
+		
+		
+		if(useList.containsKey(param))
+		{
+			ArrayList<Emission> actorsList = useList.get(param).playedEmission;
+			if(int_id < actorsList.size())
+				System.out.println(actorsList.get(int_id).display());
+		}
+		
+
+		else if(useList.containsKey(param.substring(1)))
+		{
+			ArrayList<Emission> actorsList = useList.get(param.substring(1)).playedEmission;
+			if(int_id < actorsList.size())
+				System.out.println(actorsList.get(int_id).display());
+		}
+		
+		else
+			System.out.println("Le "+ pers +" n'est pas connue du systême.");
+		
+		
 	}
 	
 	/**

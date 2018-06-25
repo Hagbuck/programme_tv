@@ -83,7 +83,7 @@ public class Channel {
 		    value = this.programOfADay.get(clef);
 		    for(Emission e : value)
 		    {
-		    	result += e.display();
+		    	result += "\n" + e.toString();
 		    }
 		    value.clear();
 		}

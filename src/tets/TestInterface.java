@@ -12,7 +12,7 @@ public class TestInterface {
 		
 		try {
 			Parser myParser = new Parser();
-			myParser.setPath("ptv.xml");
+			myParser.setPath("ptvCP.xml");
 			Lists myLists = new Lists();
 			myParser.parse(myLists);
 			

@@ -84,10 +84,24 @@ public class Emission {
 	
 	public String toString()
 	{
+		SimpleDateFormat form= new SimpleDateFormat("'le' EEEE d MMM yyyy 'à' HH:mm");
 		
 		String str = "\n ---- [EMISSION] ---- ";
 		str += "\n - Titre : "+this.title;
 		str += "\n - Channel  "+this.channel.toString();
+		str += "\n - Début : "+form.format(this.date_begin) + " \n - Fin : "+form.format(this.date_end);
+		
+		return str;
+		
+	}
+	
+	public String toString(int id)
+	{
+		SimpleDateFormat form= new SimpleDateFormat("'le' EEEE d MMM yyyy 'à' HH:mm");
+		
+		String str = "\n - - - - [EMISSION] ["+id+"] - - - - ";
+		str += "\n - Titre : "+this.title;
+		str += "\n - Début : "+form.format(this.date_begin) + " \n - Fin : "+form.format(this.date_end);
 		
 		return str;
 		
@@ -95,15 +109,14 @@ public class Emission {
 	
 	public String display()
 	{	
-		SimpleDateFormat form= new SimpleDateFormat("'Commence le' EEEE d MMM yyyy 'à' HH:mm");
-		String str = "\n ---- [EMISSION] ---- ";
+		SimpleDateFormat form= new SimpleDateFormat("'le' EEEE d MMM yyyy 'à' HH:mm");
 		
-		
-		str += "\n - "+form.format(this.date_begin);
+		String str = "\n - - - - [FICHE EMISSION] - - - - \n";
 		str += "\n - Titre : "+this.title;
-		str += "\n - Channel  "+this.channel.toString();
+		str += "\n - Commence "+form.format(this.date_begin);
+		str += "\n - Fini "+form.format(this.date_end);
 		str += "\n - Type : "+this.type;
-		str += "\n Description : "+desc + "\n";
+		str += "\n  - Description : "+desc + "\n";
 		
 		return str;		
 	}
