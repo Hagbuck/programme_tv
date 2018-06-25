@@ -242,7 +242,8 @@ public class Parser {
 						            				xmlsr.next();
 						            				ArrayList<Job> jobActor = new ArrayList<Job>();
 						            				jobActor.add(Job.actor);
-						            				actors.add(new Personne(xmlsr.getText(),jobActor));
+						            				String[] justName = xmlsr.getText().split("\\s\\(");
+						            				actors.add(new Personne(justName[0],jobActor));
 						            				
 						            			}
 						            			else if (xmlsr.getLocalName().equals("director"))
