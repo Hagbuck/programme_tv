@@ -1,7 +1,10 @@
 package prog;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 public class Emission {
 	
@@ -91,12 +94,16 @@ public class Emission {
 	}
 	
 	public String display()
-	{		
-		String str = " ---- [EMISSION] ---- ";
+	{	
+		SimpleDateFormat form= new SimpleDateFormat("'Commence le' EEEE d MMM yyyy 'à' HH:mm");
+		String str = "\n ---- [EMISSION] ---- ";
+		
+		
+		str += "\n - "+form.format(this.date_begin);
 		str += "\n - Titre : "+this.title;
 		str += "\n - Channel  "+this.channel.toString();
 		str += "\n - Type : "+this.type;
-		str += "\n Description : "+desc;
+		str += "\n Description : "+desc + "\n";
 		
 		return str;		
 	}

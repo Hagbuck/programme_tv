@@ -1,8 +1,12 @@
 package prog;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Locale;
 
 public class Channel {
 	
@@ -63,4 +67,27 @@ public class Channel {
 		return this.programOfADay.get(date);
 	}
 
+	public String printAllPrograms()
+	{
+		SimpleDateFormat form= new SimpleDateFormat("EEEE d MMM yyyy");
+		
+		String result = "";
+		Iterator i = this.programOfADay.keySet().iterator();
+		Date clef; 
+		ArrayList<Emission> value = new ArrayList<Emission>();
+		while (i.hasNext())
+		{
+			
+		    clef = (Date) i.next();
+		    result += "\n Emissions du " + form.format(clef) + "\n";
+		    value = this.programOfADay.get(clef);
+		    for(Emission e : value)
+		    {
+		    	result += e.display();
+		    }
+		    value.clear();
+		}
+		return result;
+		
+	}
 }

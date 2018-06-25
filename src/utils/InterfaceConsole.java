@@ -278,7 +278,7 @@ public class InterfaceConsole {
 		for(Channel c : inputLists.channelsList)
 		{
 			if(c.getName().equals(param))
-				System.out.println("\n-- Programmation de " + c.getName() +"\n" + c.programOfADay);
+				System.out.println("\n-- Programmation de " + c.getName() +"\n" + c.printAllPrograms());
 		}
 		
 	}

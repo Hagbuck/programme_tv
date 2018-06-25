@@ -13,7 +13,8 @@ public class Tests {
 		myParser.setPath("ptv.xml");
 		myParser.parse(myLists);
 		
-
+		System.out.println(myLists.channelsList.get(0).printAllPrograms());
+/*
 		System.out.println("\n\n---- Affichage du nombre de Channels ----");
 		System.out.println(myLists.nbOfChannels);
 		
@@ -55,7 +56,7 @@ public class Tests {
 		System.out.println("\n\n---- Affichage TreeMap Personne nb Emission ----");
 		System.out.println(myLists.nbEmissionByActor);
 		
-		
+		*/
 	}
 
 }
