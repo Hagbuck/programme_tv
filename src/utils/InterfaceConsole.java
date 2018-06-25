@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -259,17 +260,13 @@ public class InterfaceConsole {
 	private static void getNbEmissionByType()
 	{
 		TreeMap<String,Integer> emissionByType = inputLists.nbEmissionByType;
-		Object[] keysStr = emissionByType.keySet().toArray();
-		Object[] values = emissionByType.values().toArray();
-		
-		TreeMap<Integer,String> emissionByType2 = new TreeMap<Integer,String>();
-		for(int i =0;i < keysStr.length ; i++)
-			emissionByType2.put((Integer) values[i], (String) keysStr[i]);
-		
-		
-		Set<Integer> keys = emissionByType2.keySet();
-		for(Integer key : keys)
-			System.out.println(emissionByType2.get(key).toString() + "- ["+key.toString()+"]");
+		//System.out.println(emissionByType);
+		Set set = emissionByType.entrySet();
+	    Iterator iterator = set.iterator();
+	    while(iterator.hasNext()) {
+	         Map.Entry<String,Integer> mapentry = (Map.Entry<String,Integer>)iterator.next();
+	         System.out.print("clé: "+ mapentry.getKey() + "- valeur:" +mapentry.getValue()+"\n");
+	    }
 	}
 	
 	/**
