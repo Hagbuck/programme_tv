@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import utils.StaticLists;
+
 /**
  * Servlet implementation class Q1
  */
@@ -19,6 +21,7 @@ public class Q1 extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("channelsList", StaticLists.STATICK_LISTS.channelsList);
 		this.getServletContext().getRequestDispatcher( "/WEB-INF/q1.jsp" ).forward( request, response );
 	}
 

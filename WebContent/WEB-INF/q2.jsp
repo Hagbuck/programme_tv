@@ -7,9 +7,10 @@
 	<style>
      	<%@ include file="chart.css"%>
 	</style>
-<title>Programme TV - Accueil</title>
+<title>Programme TV - Liste des jours</title>
 </head>
 <body>
 	<%@ include file="header.jsp"%>
+	<p><%= request.getAttribute("channelsList") %></p>
 </body>
 </html>

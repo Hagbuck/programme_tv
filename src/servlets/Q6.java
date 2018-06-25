@@ -7,29 +7,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import prog.Channel;
 import utils.StaticLists;
 
 /**
- * Servlet implementation class Q2
+ * Servlet implementation class Q6
  */
-@WebServlet("/Q2")
-public class Q2 extends HttpServlet {
+@WebServlet("/Q6")
+public class Q6 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public Q2() {
+    public Q6() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String str = "";
-		for(Channel c : StaticLists.STATICK_LISTS.channelsList)
-		{
-			str += "\n-- Programmation de " + c.getName() +"\n" + c.programOfADay;
-		}
-		
-		request.setAttribute("channelsList", str);
-		this.getServletContext().getRequestDispatcher( "/WEB-INF/q2.jsp" ).forward( request, response );
+		request.setAttribute("channelsList", StaticLists.STATICK_LISTS.channelsList);
+		this.getServletContext().getRequestDispatcher( "/WEB-INF/q6.jsp" ).forward( request, response );
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
