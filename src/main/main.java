@@ -7,6 +7,10 @@ import utils.Parser;
 
 public class main {
 
+	/**
+	 * Main du projet. Lance l'application.
+	 * @param args Paramètres d'entrée.
+	 */
 	public static void main(String[] args) {
 		
 		try {
