@@ -41,6 +41,7 @@ public class Emission {
 		this.pathToIcon = pathToIcon;
 		this.actors = actors;
 		this.directors = directors;
+		this.channelName = channelName;
 	}
 	
 	
