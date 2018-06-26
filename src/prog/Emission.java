@@ -20,6 +20,7 @@ public class Emission {
 	private String 				pathToIcon;
 	private ArrayList<Personne> actors;
 	private ArrayList<Personne> directors;	
+	private String				channelName;
 	
 	//private Channel channel; A DISCUTER
 
@@ -27,7 +28,7 @@ public class Emission {
 	{
 		
 	}
-	public Emission(Date date_begin, Date date_end, String channel, String title, String desc, int length,String country, String type,String unitOfLength,String pathToIcon,ArrayList<Personne> actors,ArrayList<Personne> directors) {
+	public Emission(Date date_begin, Date date_end, String channel,String channelName, String title, String desc, int length,String country, String type,String unitOfLength,String pathToIcon,ArrayList<Personne> actors,ArrayList<Personne> directors) {
 		this.date_begin = date_begin;
 		this.date_end = date_end;
 		this.channel = channel;
@@ -88,7 +89,7 @@ public class Emission {
 		
 		String str = "\n ---- [EMISSION] ---- ";
 		str += "\n - Titre : "+this.title;
-		str += "\n - Channel  "+this.channel.toString();
+		str += "\n - Channel  : "+this.channelName;
 		str += "\n - Début : "+form.format(this.date_begin) + " \n - Fin : "+form.format(this.date_end);
 		
 		return str;

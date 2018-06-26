@@ -169,6 +169,7 @@ public class Parser {
 							}
 				  			channelID = xmlsr.getAttributeValue(null, "channel");
 				  			
+				  			String chanName = lists.channelsList.get(lists.channedID.get(channelID)).getName();
 				  			
 
 				  			xmlsr.next();
@@ -182,7 +183,7 @@ public class Parser {
 				            	{
 				            		if(xmlsr.getLocalName().equals("programme")) 
 				            		{
-				            			actualEmission = new Emission(date_begin, date_end,channelID,title,desc,length,country,typeOfEmission,unitOfLength,pathToIcon,actors,directors);
+				            			actualEmission = new Emission(date_begin, date_end,channelID,chanName,title,desc,length,country,typeOfEmission,unitOfLength,pathToIcon,actors,directors);
 				            			addEmissionValuesToLists(actualEmission,lists);
 
 				            			continu = false;
