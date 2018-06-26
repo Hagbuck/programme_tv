@@ -201,26 +201,12 @@ public class InterfaceConsole {
 		case "rightnow" : 
 			System.out.println("============================================");
 			if(splitCommand.length == 1)
-				inprogress(new Date());
+				inprogress("");
 			else if(splitCommand.length == 2)
-			{
-				Date testDate;
-				try {
-					
-					testDate = parseDate(splitCommand[1].replaceAll("\\s+",""));
-					if(testDate != new Date(0,0,0))
-						inprogress(testDate);
-				} 
-				catch (ParseException e) {logMsg("ERROR", "Ereur lors du parsage de la date");}
-
-			}
+				inprogress(splitCommand[1].replaceAll("\\s+",""));
 			else
 				logMsg("WARNING", "Synthax incorrecte.");
-				
-			
 
-			
-			
 			System.out.println("============================================");
 			return true;
 			
@@ -441,10 +427,6 @@ public class InterfaceConsole {
 	{
 		HashMap<String,Personne> useList;
 		
-		
-		
-	
-		
 		if(pers == "actor")
 			useList = inputLists.listOfActors;
 		else 
@@ -534,75 +516,71 @@ public class InterfaceConsole {
 	}
 	
 	
-	private static void inprogress(Date d)
+	private static void inprogress(String d)
 	{
 		//RECUP
 		TreeMap<Date,Emission> begin = inputLists.emissionBegin;
 		TreeMap<Date,Emission> end = inputLists.emissionEnd;
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		try {
-			d =  sdf.parse("11/05/2018");
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		//VARS
-		int duree_max = inputLists.length_max;
-		Date date_lim_sup = d;
-		Date date_lim_inf = d;
-		
-		//Build date limite supp
-		Calendar trans_date = Calendar.getInstance();
-		trans_date.setTime(date_lim_sup);
-		long t= trans_date.getTimeInMillis();
-		date_lim_sup =new Date(t + (duree_max * ONE_MINUTE_IN_MILLIS));
-		
-		//Build date limite inf
-		trans_date = Calendar.getInstance();
-		trans_date.setTime(date_lim_inf);
-		t= trans_date.getTimeInMillis();
-		date_lim_inf =new Date(t - (duree_max * ONE_MINUTE_IN_MILLIS));
-		
-		/*
-		System.out.println(date_lim_inf);
-		System.out.println(d);
-		System.out.println(date_lim_sup);
-		*/
-		
-		ArrayList<Emission> em_end = new ArrayList<Emission>();
-		ArrayList<Emission> em_begin = new ArrayList<Emission>();
-		ArrayList<Emission> final_em = new ArrayList<Emission>();
-		
-		
-		for (Entry<Date, Emission> entree : end.entrySet()) 
-			if(date_lim_sup.after(entree.getKey()) && d.before(entree.getKey()))
-				em_end.add(entree.getValue());
-			
-			
-		for (Entry<Date, Emission> entree : begin.entrySet()) 
-			if(date_lim_inf.before(entree.getKey()) && d.after(entree.getKey()) )
-				em_begin.add(entree.getValue());
-			
-			
-		if(em_begin.size() > em_end.size())
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy:hh:mm");
+		try 
 		{
-			for(int i=0;i < em_end.size();i++ )
-				if(em_begin.contains(em_end.get(i)))
-					final_em.add(em_end.get(i));
-		}
+			Date dd = new Date();
+			if(!d.equals(""))
+				dd =  sdf.parse(d);
+			
+			//VARS
+			int duree_max = inputLists.length_max;
+			Date date_lim_sup = dd;
+			Date date_lim_inf = dd;
+			
+			//Build date limite supp
+			Calendar trans_date = Calendar.getInstance();
+			trans_date.setTime(date_lim_sup);
+			long t= trans_date.getTimeInMillis();
+			date_lim_sup =new Date(t + (duree_max * ONE_MINUTE_IN_MILLIS));
+			
+			//Build date limite inf
+			trans_date = Calendar.getInstance();
+			trans_date.setTime(date_lim_inf);
+			t= trans_date.getTimeInMillis();
+			date_lim_inf =new Date(t - (duree_max * ONE_MINUTE_IN_MILLIS));
+			
+			ArrayList<Emission> em_end = new ArrayList<Emission>();
+			ArrayList<Emission> em_begin = new ArrayList<Emission>();
+			ArrayList<Emission> final_em = new ArrayList<Emission>();
+			
+			
+			for (Entry<Date, Emission> entree : end.entrySet()) 
+				if(date_lim_sup.after(entree.getKey()) && dd.before(entree.getKey()))
+					em_end.add(entree.getValue());
+				
+				
+			for (Entry<Date, Emission> entree : begin.entrySet()) 
+				if(date_lim_inf.before(entree.getKey()) && dd.after(entree.getKey()) )
+					em_begin.add(entree.getValue());
+				
+				
+			if(em_begin.size() > em_end.size())
+			{
+				for(int i=0;i < em_end.size();i++ )
+					if(em_begin.contains(em_end.get(i)))
+						final_em.add(em_end.get(i));
+			}
+			
+			else
+			{
+				for(int i=0;i < em_begin.size();i++ )
+					if(em_end.contains(em_begin.get(i)))
+						final_em.add(em_begin.get(i));
+			}
+			
+			for(int i = 0; i < final_em.size() ; i++)
+				System.out.println(final_em.get(i).display());
+						
+		} 
 		
-		else
-		{
-			for(int i=0;i < em_begin.size();i++ )
-				if(em_end.contains(em_begin.get(i)))
-					final_em.add(em_begin.get(i));
-		}
-		
-		for(int i = 0; i < final_em.size() ; i++)
-			System.out.println(final_em.get(i).display());
-
+		catch (ParseException e) {logMsg("WARNING", "Date invalide.");}
 	}
 	
 	
