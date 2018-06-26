@@ -12,7 +12,7 @@
       * [Fonctions principales](#fonctions-principales)
    * [Utilisation](#utilisation)
       * [Utiliser le JAR](#utiliser-le-jar)
-      * [Altérnative](#altérnative)
+      * [Solution Alternative](#solution-alternative)
    * [Guide des commandes](#guide-des-commandes)
 
 <!-- Added by: kurai, at: 2018-06-26T22:48+02:00 -->
@@ -45,11 +45,11 @@ Le fichier d'entrée est un fichier XML et l'application est réalisée en Java 
 
 ## Utiliser le JAR
 * **OS Support :** Windows, Linux.
-* **Requierments :** Java.
+* **Requirement :** Java.
 * Naviguez dans le projet dans le répertoire "**[PATH_APPLICATION]/ressource/**"
 * Entrez "**java -jar runMe.jar**"
 
-## Solution Altérnative
+## Solution Alternative
 * Importer le projet dans Eclipse.
 * Ouvrez le projet et localiser dans le package "main" la classe "**main.java**".
 * "**Run**" le main.
