@@ -21,20 +21,31 @@ import prog.Personne;
 
 public class Parser {
 	private String pathToXML;
+	
+	
 	//GETTER SETTERS
+	/**
+	 * Permet de définir le répertoire où est stocké le fichier xml
+	 * @param path : répertoire où le fichier xml est stocké
+	 */
 	public void setPath(String path)
 	{
 		this.pathToXML = path;
 	}
 	
+	/**
+	 * Permet de récupérer le répertoire où est stocké le fichier xml
+	 *
+	 */
 	public String getPath()
 	{
 		return this.pathToXML;
 	}
 	
-	
+	// CONSTRUCTOR
 	public Parser()
 	{
+		
 	}
 	public Parser(String pathToXML)
 	{
@@ -42,6 +53,13 @@ public class Parser {
 	}
 	
 	//CLASSIC METHODS
+	
+	/**
+	 * Parcours le fichier XML définit au préalable puis rempli les listes de l'objet "Lists" donné en paramètre
+	 * 
+	 * @param lists : objet "Lists" contenant un ensemble de listes pour les différentes fonctions du programme
+	 * @return : retourne true si le parsage s'est effectué correctement (lecture du fichier, parsage des dates)
+	 */
 	public boolean parse(Lists lists)
 	{
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -91,6 +109,7 @@ public class Parser {
 		
 	    Emission actualEmission = new Emission();
 
+	    //demarrage lecture du XML
 	    try {
 			while (xmlsr.hasNext()) 
 			{
@@ -98,11 +117,12 @@ public class Parser {
 				
 				switch (eventType) 
 				{
+					
 				  	case XMLEvent.START_ELEMENT:
 				  		
 				  		type = xmlsr.getLocalName();
 
-				  		//DETECT CHANNEL
+				  		// ---- CHANNEL ----
 				  		if(type.equals("channel"))
 				  		{
 				  			
@@ -115,11 +135,11 @@ public class Parser {
 				            xmlsr.next();
 				            boolean continu = true;
 				            
-				            //si c'est une channel on récupère le display-name et le lien vers l'icon
 				            while(continu) 
 				            {
 				            	if(xmlsr.isEndElement())
 				            	{
+				            		//fin des descriptions
 				            		if(xmlsr.getLocalName().equals("channel")) 
 				            		{
 				            			continu = false;
@@ -127,9 +147,10 @@ public class Parser {
 				            	}
 				            	
 				            	xmlsr.next();
+				            	
 				            	if (xmlsr.isStartElement())
 				            	{
-
+				            		//Nom de la chaine
 				            		if(xmlsr.getLocalName().equals("display-name"))
 					            	{
 				            			
@@ -137,6 +158,7 @@ public class Parser {
 					            		actualChannel.setName(xmlsr.getText());
 					            	}
 				            		
+				            		//lien vers l'icone de la chaine
 					            	else if (xmlsr.getLocalName().equals("icon"))
 					            	{
 					            		actualChannel.pathToIcon = xmlsr.getAttributeValue(null, "src");
@@ -145,17 +167,15 @@ public class Parser {
 				            	}
 				            	
 				            }
-
+				            
+				            //Ajout de la chaine dans l'arrayList et dans l'hashMap (Name / Int)  
 				            lists.channelsList.add(actualChannel);
 				            lists.channedID.put(actualChannel.getId(), lists.channelsList.indexOf(actualChannel));
 				  		}
 				  		
-				  		//PROGRAMME
+				  		// ---- PROGRAMME ----
 				  		if(type.equals("programme"))
 				  		{
-				  			//exemple date 20180430062500 +0200
-				  			//			  "AAAAMMddHHmmss Z"
-				  			
 				  			try {
 				  				dateString = xmlsr.getAttributeValue(null, "start");
 								date_begin = sdf.parse(dateString.substring(0,13));
@@ -176,16 +196,17 @@ public class Parser {
 				            boolean continu = true;
 				            boolean stillCredits = true;
 				            
-				            //si c'est une channel on récupère le display-name et le lien vers l'icon
 				            while(continu) 
 				            {
 				            	if(xmlsr.isEndElement())
 				            	{
+				            		//Si arrivé à la fin de l'émission
 				            		if(xmlsr.getLocalName().equals("programme")) 
 				            		{
 				            			actualEmission = new Emission(date_begin, date_end,channelID,chanName,title,desc,length,country,typeOfEmission,unitOfLength,pathToIcon,actors,directors);
 				            			addEmissionValuesToLists(actualEmission,lists);
 
+				            			//reinitialisation des valeurs de l'emission courante
 				            			continu = false;
 				            			dateString = "";
 				            			date_begin = null;
@@ -205,13 +226,17 @@ public class Parser {
 				            	}
 				            	
 				            	xmlsr.next();
+				            	
 				            	if (xmlsr.isStartElement())
 				            	{
+				            		//titre
 				            		if(xmlsr.getLocalName().equals("title"))
 					            	{
 					            		xmlsr.next();
 					            		title = xmlsr.getText();
 					            	}
+				            		
+				            		//description
 					            	else if (xmlsr.getLocalName().equals("desc"))
 					            	{
 					            		xmlsr.next();
@@ -224,6 +249,8 @@ public class Parser {
 					            		}
 					            		
 					            	}
+				            		
+				            		//casting
 					            	else if (xmlsr.getLocalName().equals("credits"))
 					            	{
 					            		while(stillCredits)
@@ -259,6 +286,8 @@ public class Parser {
 					            		}
 					            		stillCredits = true;
 					            	}
+				            		
+				            		//catégorie
 					            	else if (xmlsr.getLocalName().equals("category"))
 					            	{
 					            		xmlsr.next();
@@ -266,6 +295,8 @@ public class Parser {
 					            		catTab = xmlsr.getText().split(" ");
 					            		typeOfEmission = catTab[0];
 					            	}
+				            		
+				            		//duree
 					            	else if (xmlsr.getLocalName().equals("length"))
 					            	{
 					            		unitOfLength = xmlsr.getAttributeValue(null, "units");
@@ -277,10 +308,14 @@ public class Parser {
 					            		else if(unitOfLength.equals("hours") && length * 60 > lists.length_max )
 					            			lists.length_max = length * 60;
 					            	}
+				            		
+				            		// icone pour l'emission
 					            	else if (xmlsr.getLocalName().equals("icon"))
 					            	{
 					            		pathToIcon = xmlsr.getAttributeValue(null, "src");
 					            	}
+				            		
+				            		//Pays de l'emission
 					            	else if (xmlsr.getLocalName().equals("country"))
 					            	{
 					            		xmlsr.next();
@@ -331,23 +366,27 @@ public class Parser {
 	    
 	}
 	
+	/**
+	 * Remplissage des listes à la fin du parsage d'une emission
+	 * @param emissionToAdd : emission contenant les données à ajouter
+	 * @param lists :  objet "Lists" contenant un ensemble de listes pour les différentes fonctions du programme
+	 */
+	
 	@SuppressWarnings("deprecation")
 	private void addEmissionValuesToLists(Emission emissionToAdd, Lists lists)
 	{
-		// ajout de l'emission dans la hashmap des dates dans les channels
-		//Start Date
-		
+		//Date de début de l'émission
 		Date dateStart = emissionToAdd.getDateStart();
-
+		//Date de fin de l'émission
 		Date dateEnd = emissionToAdd.getDateEnd();
 		
-		
+		//Pour ne garder que le jour (mise à 0 des heures,minutes,secondes)
 		Date dateAtZero = new Date(dateStart.getTime());
 		dateAtZero.setHours(0);
 		dateAtZero.setMinutes(0);
 		dateAtZero.setSeconds(0);
 		
-		//ajout liste des dates globales
+		//ajout liste des dates de programmation
 		if(!lists.daysOfPrograms.contains(dateAtZero)) 
 		{
 			lists.daysOfPrograms.add(dateAtZero);
@@ -366,7 +405,7 @@ public class Parser {
 		dateAtZero.setMinutes(0);
 		dateAtZero.setSeconds(0);
 		
-		
+		//ajout liste des dates de programmation
 		if(!lists.daysOfPrograms.contains(dateAtZero)) 
 		{
 			lists.daysOfPrograms.add(dateAtZero);
@@ -383,7 +422,6 @@ public class Parser {
 		
 		
 		// ajout de l'emission dans treemap fin
-		
 		lists.emissionEnd.put(dateEnd, emissionToAdd);
 		
 		// ajouts actors
@@ -432,6 +470,7 @@ public class Parser {
 		boolean badWord = false;
 		for (String s : allDesc)
 		{
+			s = s.toLowerCase();
 			for(String bw : badWords)
 			{
 				if(bw.equalsIgnoreCase(s))
