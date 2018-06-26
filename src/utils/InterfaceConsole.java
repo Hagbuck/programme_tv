@@ -317,7 +317,7 @@ public class InterfaceConsole {
 				{
 					if( c.programOfADay.containsKey(d) )
 					{
-						if( id_string < c.programOfADay.size() )
+						if( id_string < c.programOfADay.get(d).size() )
 						{
 							System.out.println(c.programOfADay.get(d).get(id_string).display());
 							find = true;
