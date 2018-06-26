@@ -314,6 +314,16 @@ public class Parser {
 	    }
 	    lists.triNbEmissionByPersonne();
 	    
+	    i = lists.listOfDirectors.keySet().iterator();
+	    k ="";
+	    while(i.hasNext())
+	    {
+	    	k = i.next();
+	    	lists.nbEmissionByDirector.put(lists.listOfDirectors.get(k).getName(), lists.listOfDirectors.get(k).getNbPlayedEmission());
+	    }
+	    
+	    lists.triNbEmissionByDirector();
+	    
 	    return true;
 	    
 	    

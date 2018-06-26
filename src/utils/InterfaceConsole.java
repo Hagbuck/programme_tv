@@ -441,6 +441,10 @@ public class InterfaceConsole {
 	{
 		HashMap<String,Personne> useList;
 		
+		
+		
+	
+		
 		if(pers == "actor")
 			useList = inputLists.listOfActors;
 		else 
@@ -483,17 +487,20 @@ public class InterfaceConsole {
 	 */
 	private static void getPers(String pers)
 	{
-		HashMap<String,Personne> useList;
+		TreeMap<String,Integer> useList;
 		
 		if(pers == "actor")
-			useList = inputLists.listOfActors;
+			useList = inputLists.nbEmissionByActor;
 		else 
-			useList = inputLists.listOfDirectors;
+			useList = inputLists.nbEmissionByDirector;
 		
-		Set<String> keys = useList.keySet();
-		
-		for(String key : keys)
-			System.out.println(key + " ~ ["+ useList.get(key).getNbPlayedEmission() +"]");
+		Set set = useList.entrySet();
+	    Iterator iterator = set.iterator();
+	    while(iterator.hasNext()) {
+	         Map.Entry<String,Integer> mapentry = (Map.Entry<String,Integer>)iterator.next();
+	         System.out.print(mapentry.getKey() + " - [" +mapentry.getValue()+"]\n");
+	    }
+
 			
 	}
 	

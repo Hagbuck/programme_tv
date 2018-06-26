@@ -23,6 +23,7 @@ public class Lists {
 	public HashMap<String,Personne> listOfDirectors;
 	//VII)
 	public TreeMap<String,Integer> nbEmissionByActor;
+	public TreeMap<String,Integer> nbEmissionByDirector;
 	//VIII
 	public TreeMap<String,Integer> nbEmissionByType;
 	//IX
@@ -41,6 +42,7 @@ public class Lists {
 		this.listOfActors		= new HashMap<String,Personne>();
 		this.listOfDirectors 	= new HashMap<String,Personne>();
 		this.nbEmissionByActor 	= new TreeMap<String,Integer>();
+		this.nbEmissionByDirector 	= new TreeMap<String,Integer>();
 		this.nbEmissionByType 	= new TreeMap<String,Integer>();
 		this.DictionnaryList 	= new HashMap<String, ArrayList<Emission>>();
 		this.channedID 			= new HashMap<String,Integer>();
@@ -66,4 +68,17 @@ public class Lists {
 		this.nbEmissionByActor = treeMapTriee;
 		
 	}
+	
+	public void triNbEmissionByDirector()
+	{
+
+		TreeValuesComparator comparateur = new TreeValuesComparator(this.nbEmissionByDirector);
+		TreeMap<String,Integer> treeMapTriee = new TreeMap<String,Integer>(comparateur);
+		treeMapTriee.putAll(this.nbEmissionByDirector);
+		this.nbEmissionByDirector.clear();
+		this.nbEmissionByDirector = treeMapTriee;
+		
+	}
+	
+	
 }
