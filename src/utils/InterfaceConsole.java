@@ -19,15 +19,25 @@ import javax.swing.plaf.BorderUIResource.EmptyBorderUIResource;
 
 import prog.*;
 
+/**
+ * Constructor de la Classe InterfaceConsole.
+ * @author DrainMan
+ *
+ */
 public class InterfaceConsole {
 	
-	// static liste
+	/************** VARS ******************/
 	private static boolean run = false;
 	private static Lists inputLists;
 	private static BufferedReader buf ;
 	static final long ONE_MINUTE_IN_MILLIS=60000;
 	
-	public static void initConsole(Lists p_lists) throws IOException //Passé liste en paramètre
+	/**
+	 * Initie l'inteface console de l'application.
+	 * @param p_lists Un objet contenant toute les listes nécessaires.
+	 * @throws IOException
+	 */
+	public static void initConsole(Lists p_lists) throws IOException 
 	{
 		inputLists = p_lists;
 		
@@ -45,6 +55,12 @@ public class InterfaceConsole {
 		
 	}
 	
+	/**
+	 * Lie et interprète les commandes passée en console.
+	 * @param command La commande en forme string.
+	 * @return true si l'interface doit continuer à tourner, false si elle doit s'arréter.
+	 * @throws IOException
+	 */
 	public static boolean readMessage(String command) throws IOException
 	{
 		String [] splitCommand = command.split("-");
@@ -62,7 +78,7 @@ public class InterfaceConsole {
 			System.out.println(" * 'chan - [NAME] - dd/MM/YYYY'~ Donne la programmation de la chaine [NAME] à la date donnée.");
 			System.out.println(" * 'chan - [NAME] - [DATE] - [ID]' ~ Affiche la fiche de l'émission [ID] appartenant à la chaine [NAME] pour la date [DATE].");
 			System.out.println(" /!\\ * 'rightnow' ~ Donne les émissions en cours actuellement. (Heure du PC) ");
-			System.out.println(" /!\\ * 'rightnow - [DATE]' ~ Donne les émissions en cours à la date [DATE].");
+			System.out.println(" /!\\ * 'rightnow - dd/MM/YYYY:hh:mm' ~ Donne les émissions en cours à la date [DATE].");
 			System.out.println(" * 'when' ~ Donne les jours aillant une programmation et connue par le systême.");
 			System.out.println(" * 'emission_by_type' ~ Donne les types d'émissions triées par type.");
 			System.out.println(" * 'actor' ~ Donne la liste des acteurs connus par le systême.");
@@ -97,9 +113,6 @@ public class InterfaceConsole {
 			
 			
 		/** Affiche des infos sur les chaines **/
-		// "chan" : Affiche toute les chaines connues
-		// "chan - [NAME] : Donne la programmation de toute la chaine [NAME]
-		// "chan - [NAME] - [DATE] : Donne la programmation de la chaine [NAME] pour la date [DATE]
 		case "chan" :
 			System.out.println("============================================");
 			
@@ -151,8 +164,6 @@ public class InterfaceConsole {
 			return true;
 		
 		/** Affiche des informations sur les acteurs **/
-		// "actor" : Affiche tout les acteurs
-		// "actor - [NAME]" : Affiche les émissions dans lequelle joue l'acteur
 		case "actor" :
 			System.out.println("============================================");
 			
@@ -170,8 +181,6 @@ public class InterfaceConsole {
 		
 			
 		/** Affiche des informations sur les directeurs **/
-		// "director" : Affiche tout les acteurs
-		// "director - [NAME]" : Affiche les émissions dans lequelle joue l'acteur
 		case "director":
 			System.out.println("============================================");
 			
@@ -197,7 +206,8 @@ public class InterfaceConsole {
 			System.out.println("============================================");
 			return true;
 			
-			
+		
+		/** Affiche les émissions passant en ce moment (par défaut) ou à la date donnée. **/
 		case "rightnow" : 
 			System.out.println("============================================");
 			if(splitCommand.length == 1)
@@ -223,7 +233,8 @@ public class InterfaceConsole {
 	
 	
 	/**
-	 * Display Channel List. Call with command 'chan'
+	 * Affiche la liste des châines.
+	 * Lié à la commande :  'chan'
 	 */
 	private static void getListChannels()
 	{
@@ -237,7 +248,6 @@ public class InterfaceConsole {
 		//Au - un élément
 		else
 		{
-			
 			for(int i=0;i < chanList.size();i++)
 				System.out.println("["+i+"]" + chanList.get(i).toString());	
 		}
@@ -245,9 +255,9 @@ public class InterfaceConsole {
 	
 	
 	/**
-	 * Display Programmation for one day and a specific channel
-	 * TODO
-	 * @param id Id of the channel
+	 * Affiche la programation pour un jour et une chaîne donnée.
+	 * @param id L'id de la channel.
+	 * @param date La date demandée.
 	 * @throws ParseException 
 	 */
 	private static void getProgChannelByDate(String param,String date) throws ParseException
@@ -276,11 +286,9 @@ public class InterfaceConsole {
 				}
 					
 			}
-			
 			if(!find)
 				logMsg("INFO","Pas correspondance trouvé.");
 		}
-		
 		else
 			System.out.println("Invalid Date dd/MM/YYYY");
 	}
@@ -288,17 +296,16 @@ public class InterfaceConsole {
 	
 	/**
 	 * Affiche la fiche de l'émission id de la chaine param pour la date date.
-	 * @param param
-	 * @param date
-	 * @param id
+	 * @param param Le nom de l'émission.
+	 * @param date La date de l'émission concernée.
+	 * @param id L'id de l'émission dans l'ensemble fournit.
 	 * @throws ParseException
 	 */
 	private static void getEmission(String param,String date,String id) throws ParseException
 	{
+		
 		Date d = parseDate(date);
-		
-		int id_string = Integer.parseInt(id);
-		
+		int id_string = Integer.parseInt(id);	
 		
 		if(!d.equals(new Date(0,0,0)))
 		{
@@ -314,22 +321,19 @@ public class InterfaceConsole {
 						{
 							System.out.println(c.programOfADay.get(d).get(id_string).display());
 							find = true;
-						}
-							
+						}		
 						else
 							logMsg("INFO", "ID Incorrect");
 							
 					}					
 					else
 						logMsg("INFO","Pas de programmation pour la chaîne et le jour donnée.");
-				}
-					
+				}		
 			}
 			
 			if(!find)
 				logMsg("INFO", "L'émission n'a pas put être trouvé.");
-		}
-		
+		}	
 		else
 			System.out.println("Invalid Date dd/MM/YYYY");		
 	}
@@ -337,7 +341,7 @@ public class InterfaceConsole {
 	
 	
 	/**
-	 * Display the days who comport a programmation
+	 * Retourne la liste des jours comportant une programmation.
 	 */
 	private static void getDaysWithProgramation()
 	{
@@ -348,10 +352,8 @@ public class InterfaceConsole {
 			logMsg("INFO", "Pas de date avec une programmation connue par le systême.");
 			
 		else
-		{
 			for(int i=0 ; i < dayWithProgramation.size() ; i++)
 				System.out.println(dayWithProgramation.get(i).toString());
-		}
 	}
 	
 
@@ -359,13 +361,13 @@ public class InterfaceConsole {
 	
 
 	/**
-	 * Affiche les émissions par type trié par nombre contenu dans le systeme.
+	 * Affiche les émissions par type trié par nombre contenu dans le sytême.
 	 */
 	private static void getNbEmissionByType()
 	{
 		TreeMap<String,Integer> emissionByType = inputLists.nbEmissionByType;
-		//System.out.println(emissionByType);
 		Set set = emissionByType.entrySet();
+		//PARCOURS
 	    Iterator iterator = set.iterator();
 	    while(iterator.hasNext()) {
 	         Map.Entry<String,Integer> mapentry = (Map.Entry<String,Integer>)iterator.next();
@@ -422,7 +424,12 @@ public class InterfaceConsole {
 
 	}
 	
-	
+	/**
+	 * Affiche la fiche de l'émission pour la personne donnée et l'id précisé.
+	 * @param pers actor ou director
+	 * @param id de l'émission pour cette personne
+	 * @param param Nom de la personne.
+	 */
 	private static void getEmissionByPers(String pers, String id, String param)
 	{
 		HashMap<String,Personne> useList;
@@ -454,18 +461,12 @@ public class InterfaceConsole {
 				System.out.println("Le "+ pers +" n'est pas connue du systême.");
 		}
 		catch (NumberFormatException e) {logMsg("INFO", "ID incorrect.");}
-		
-		
-		
-
-		
-		
+	
 	}
 	
 	/**
-	 * Display actors and directors in the system
-	 * TODO - Trié par films
-	 * @param pers Can be actor or director
+	 * Affiche la liste des personnes connues par le systême.
+	 * @param pers "actor" or "director"
 	 */
 	private static void getPers(String pers)
 	{
@@ -486,8 +487,7 @@ public class InterfaceConsole {
 			
 	}
 	
-	
-	//TODO key en full minuscurle pour recherche
+
 	/**
 	 * Search emission with specifics words
 	 * @param words contains all words
@@ -515,7 +515,10 @@ public class InterfaceConsole {
 		 }		 
 	}
 	
-	
+	/**
+	 * Affiche les émissions en cours à la date donnée.
+	 * @param d Date de référence.
+	 */
 	private static void inprogress(String d)
 	{
 		//RECUP
@@ -585,7 +588,7 @@ public class InterfaceConsole {
 	
 	
 	/**
-	 * Log message for the system.
+	 * Affiche un message de log.
 	 * @param type The type of message
 	 * @param str The message
 	 */
@@ -620,16 +623,10 @@ public class InterfaceConsole {
 				return sdf.parse("00/00/00");
 			else if(splitDate[2].length() != 4)
 				return sdf.parse("00/00/0000");
-			else
-			{
-				
+			else				
 				return sdf.parse(str_date);
-			}
-
-		}
-		
+		}		
 		else
 			return sdf.parse("00/00/0000");
 	}
-	
 }
