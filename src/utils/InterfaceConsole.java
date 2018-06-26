@@ -346,6 +346,7 @@ public class InterfaceConsole {
 	private static void getDaysWithProgramation()
 	{
 		ArrayList<Date> dayWithProgramation = inputLists.daysOfPrograms;
+		SimpleDateFormat sdf = new SimpleDateFormat("EEEE d MMM yyyy");
 		
 		//Si liste vide
 		if(dayWithProgramation.size() == 0)
@@ -353,7 +354,7 @@ public class InterfaceConsole {
 			
 		else
 			for(int i=0 ; i < dayWithProgramation.size() ; i++)
-				System.out.println(dayWithProgramation.get(i).toString());
+				System.out.println(sdf.format(dayWithProgramation.get(i)).toString());
 	}
 	
 
