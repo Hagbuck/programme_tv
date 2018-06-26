@@ -73,24 +73,24 @@ public class InterfaceConsole {
 		/** Request HELP **/
 		case "help":
 			System.out.println("= = = = = = Command List = = = = = = ");
-			System.out.println(" * 'chan' ~ Donne la liste des chaînes connues par le systême.");
-			System.out.println(" * 'chan - [NAME]' ~ Affiche la programmation de la chaine [NAME]");
-			System.out.println(" * 'chan - [NAME] - dd/MM/YYYY'~ Donne la programmation de la chaine [NAME] à la date donnée.");
+			System.out.println(" * 'chan' ~ Donne la liste des chaînes connues par le système.");
+			System.out.println(" * 'chan - [NAME]' ~ Affiche la programmation de la chaîne [NAME]");
+			System.out.println(" * 'chan - [NAME] - dd/MM/YYYY'~ Donne la programmation de la chaîne [NAME] à la date donnée.");
 			System.out.println(" * 'chan - [NAME] - [DATE] - [ID]' ~ Affiche la fiche de l'émission [ID] appartenant à la chaine [NAME] pour la date [DATE].");
-			System.out.println(" /!\\ * 'rightnow' ~ Donne les émissions en cours actuellement. (Heure du PC) ");
-			System.out.println(" /!\\ * 'rightnow - dd/MM/YYYY:hh:mm' ~ Donne les émissions en cours à la date [DATE].");
-			System.out.println(" * 'when' ~ Donne les jours aillant une programmation et connue par le systême.");
+			System.out.println(" * 'rightnow' ~ Donne les émissions en cours actuellement. (Heure du PC) ");
+			System.out.println(" * 'rightnow - dd/MM/YYYY:hh:mm' ~ Donne les émissions en cours à la date [DATE].");
+			System.out.println(" * 'when' ~ Donne les jours ayant une programmation et connue par le système.");
 			System.out.println(" * 'emission_by_type' ~ Donne les types d'émissions triées par type.");
-			System.out.println(" * 'actor' ~ Donne la liste des acteurs connus par le systême.");
+			System.out.println(" * 'actor' ~ Donne la liste des acteurs connus par le système.");
 			System.out.println(" * 'actor - [NAME]' ~ Donne la liste des émissions dans lesquelles joue l'acteur [NAME].");
 			System.out.println(" * 'actor - [ID] - [NAME] ' ~ Affiche la fiche de l'émission [ID] de l'acteur [NAME].");
-			System.out.println(" * 'director' ~ Donne la liste des directeurs connus par le systême.");
+			System.out.println(" * 'director' ~ Donne la liste des directeurs connus par le système.");
 			System.out.println(" * 'director - [NAME]' ~ Donne la liste des émissions dirigées par le directeur [NAME].");
 			System.out.println(" * 'director - [ID] - [NAME]' ~ Affiche la fiche de l'émission [ID] du directeur [NAME].");
-			System.out.println(" * 'search - [WORDS]' ~ Recherche la correspondances entre les mots [WORDS] et les émissions connues.");
+			System.out.println(" * 'search - [WORDS]' ~ Recherche la correspondance entre les mots [WORDS] et les émissions connues.");
 			System.out.println(" * 'test' ~ Affichage de test de l'application.");
 			System.out.println(" * 'exit' ~ Quitte l'application.");
-			System.out.println(" * 'deathApp' ~ Supprime l'application et toute ses données. NE PAS UTILISER !!");
+			System.out.println(" * 'deathApp' ~ Supprime l'application et toutes ses données. NE PAS UTILISER !!");
 			System.out.println("= = = = = = Fin List = = = = = = ");
 			return true;
 			
@@ -223,7 +223,7 @@ public class InterfaceConsole {
 		
 		/** Commande non reconnue par le systeme **/
 		default:
-			System.out.println("Commande inconnue.");
+			System.out.println("Commande inconnue. Veuillez taper 'help' pour avoir la liste des commandes.");
 			return true;
 
 		}
