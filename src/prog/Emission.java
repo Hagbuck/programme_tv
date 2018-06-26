@@ -21,8 +21,7 @@ public class Emission {
 	private ArrayList<Personne> actors;
 	private ArrayList<Personne> directors;	
 	private String				channelName;
-	
-	//private Channel channel; A DISCUTER
+
 
 	public Emission()
 	{

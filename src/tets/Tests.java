@@ -9,9 +9,14 @@ public class Tests {
 		
 		Parser myParser = new Parser();
 		Lists myLists = new Lists();
-		
+
 		myParser.setPath("ptvCP.xml");
 		myParser.parse(myLists);
+		
+		
+		String test = "France 3";
+		System.out.println(test.replaceAll("\\s+", ""));
+		
 		/*
 		System.out.println(myLists.channelsList.get(0).printAllPrograms());
 		System.out.println("\n\n---- Affichage Dictionnaire ----");

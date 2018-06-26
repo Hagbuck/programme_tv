@@ -10,6 +10,7 @@ public class TestInterface {
 	public static void main(String[] args) {
 		
 		
+		
 		try {
 			Parser myParser = new Parser();
 			myParser.setPath("ptvCP.xml");

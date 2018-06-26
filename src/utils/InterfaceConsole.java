@@ -273,7 +273,7 @@ public class InterfaceConsole {
 			
 			for(Channel c : inputLists.channelsList)
 			{
-				if(c.getName().equals(param))
+				if(c.getNameWithoutSpace().equals(param))
 				{
 					Set<Date> keys = c.programOfADay.keySet();
 					for(Date key : keys)
@@ -313,7 +313,7 @@ public class InterfaceConsole {
 			
 			for(Channel c : inputLists.channelsList)
 			{
-				if(c.getName().equals(param))
+				if(c.getNameWithoutSpace().equals(param))
 				{
 					if( c.programOfADay.containsKey(d) )
 					{
@@ -383,7 +383,7 @@ public class InterfaceConsole {
 	private static void getProgChannel(String param)
 	{
 		for(Channel c : inputLists.channelsList)
-			if(c.getName().equals(param))
+			if(c.getNameWithoutSpace().equals(param))
 				System.out.println("\n-- Programmation de " + c.getName() +"\n" + c.printAllPrograms());	
 	}
 	

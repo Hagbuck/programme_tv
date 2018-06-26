@@ -12,6 +12,7 @@ public class Channel {
 	
 	private String id;
 	private String name;
+	private String nameWithoutSpace;
 	public String pathToIcon;
 	public HashMap<Date, ArrayList<Emission>> programOfADay;
 
@@ -26,7 +27,6 @@ public class Channel {
 		this.name = p_name;
 		this.pathToIcon = p_path;
 		this.programOfADay = new HashMap<Date, ArrayList<Emission>>();
-		System.out.println("creation channel termine");
 	}
 	
 	public String toString()
@@ -46,10 +46,17 @@ public class Channel {
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getNameWithoutSpace() {
+		return nameWithoutSpace;
+	}
+	public void setNameWithoutSpace(String nameWithoutSpace)
+	{
+		this.nameWithoutSpace = nameWithoutSpace;
+	}
+	
 	
 	public void addEmission(Date date,Emission emission)
 	{

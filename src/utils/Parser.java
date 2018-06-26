@@ -156,6 +156,7 @@ public class Parser {
 				            			
 					            		xmlsr.next();
 					            		actualChannel.setName(xmlsr.getText());
+					            		actualChannel.setNameWithoutSpace(xmlsr.getText().replaceAll("\\s+", ""));
 					            	}
 				            		
 				            		//lien vers l'icone de la chaine

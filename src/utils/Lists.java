@@ -47,6 +47,7 @@ public class Lists {
 		this.channedID 				= new HashMap<String,Integer>();
 	}
 	
+	
 	/**
 	 * Tri la liste des emissions par type à la fin du parsage
 	 * 
