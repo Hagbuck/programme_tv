@@ -65,10 +65,10 @@ public class InterfaceConsole {
 			System.out.println(" * 'emission_by_type' ~ Donne les types d'émissions triées par type.");
 			System.out.println(" * 'actor' ~ Donne la liste des acteurs connus par le systême.");
 			System.out.println(" * 'actor - [NAME]' ~ Donne la liste des émissions dans lesquelles joue l'acteur [NAME].");
-			System.out.println(" * 'actor - [NAME] - [ID]' ~ Affiche la fiche de l'émission [ID] de l'acteur [NAME].");
+			System.out.println(" * 'actor - [ID] - [NAME] ' ~ Affiche la fiche de l'émission [ID] de l'acteur [NAME].");
 			System.out.println(" * 'director' ~ Donne la liste des directeurs connus par le systême.");
 			System.out.println(" * 'director - [NAME]' ~ Donne la liste des émissions dirigées par le directeur [NAME].");
-			System.out.println(" * 'director - [NAME] - [ID]' ~ Affiche la fiche de l'émission [ID] du directeur [NAME].");
+			System.out.println(" * 'director - [ID] - [NAME]' ~ Affiche la fiche de l'émission [ID] du directeur [NAME].");
 			System.out.println(" * 'search - [WORDS]' ~ Recherche la correspondances entre les mots [WORDS] et les émissions connues.");
 			System.out.println(" * 'test' ~ Affichage de test de l'application.");
 			System.out.println(" * 'exit' ~ Quitte l'application.");
@@ -159,7 +159,7 @@ public class InterfaceConsole {
 			else if(splitCommand.length == 2)
 				getInfoPers("actor",splitCommand[1]);
 			else if(splitCommand.length == 3)
-				getEmissionByPers("actor", splitCommand[1], splitCommand[2].replaceAll("\\s+",""));
+				getEmissionByPers("actor",splitCommand[1].replaceAll("\\s+",""), splitCommand[2]);
 			else
 				System.out.println("Syntax incorecte");
 			
@@ -178,7 +178,7 @@ public class InterfaceConsole {
 			else if(splitCommand.length == 2)
 				getInfoPers("director",splitCommand[1]);
 			else if(splitCommand.length == 3)
-				getEmissionByPers("director", splitCommand[1], splitCommand[2].replaceAll("\\s+",""));
+				getEmissionByPers("director",splitCommand[1].replaceAll("\\s+",""), splitCommand[2]);
 			else
 				System.out.println("Syntax incorecte");
 			
@@ -191,6 +191,33 @@ public class InterfaceConsole {
 			System.out.println("============================================");
 	
 			search(splitCommand[1]);
+			
+			System.out.println("============================================");
+			return true;
+			
+			
+		case "rightnow" : 
+			System.out.println("============================================");
+			if(splitCommand.length == 1)
+				inprogress(new Date());
+			else if(splitCommand.length == 2)
+			{
+				Date testDate;
+				try {
+					
+					testDate = parseDate(splitCommand[1].replaceAll("\\s+",""));
+					if(testDate != new Date(0,0,0))
+						inprogress(testDate);
+				} 
+				catch (ParseException e) {logMsg("ERROR", "Ereur lors du parsage de la date");}
+
+			}
+			else
+				logMsg("WARNING", "Synthax incorrecte.");
+				
+			
+
+			
 			
 			System.out.println("============================================");
 			return true;
@@ -408,7 +435,7 @@ public class InterfaceConsole {
 	}
 	
 	
-	private static void getEmissionByPers(String pers, String param, String id)
+	private static void getEmissionByPers(String pers, String id, String param)
 	{
 		HashMap<String,Personne> useList;
 		
@@ -417,26 +444,32 @@ public class InterfaceConsole {
 		else 
 			useList = inputLists.listOfDirectors;
 		
-		int int_id = Integer.parseInt(id);
-		
-		
-		if(useList.containsKey(param))
-		{
-			ArrayList<Emission> actorsList = useList.get(param).playedEmission;
-			if(int_id < actorsList.size())
-				System.out.println(actorsList.get(int_id).display());
+		try {			
+			int int_id = Integer.parseInt(id);
+			
+			if(useList.containsKey(param))
+			{
+				ArrayList<Emission> actorsList = useList.get(param).playedEmission;
+				if(int_id < actorsList.size())
+					System.out.println(actorsList.get(int_id).display());
+			}
+			
+
+			else if(useList.containsKey(param.substring(1)))
+			{
+				ArrayList<Emission> actorsList = useList.get(param.substring(1)).playedEmission;
+				if(int_id < actorsList.size())
+					System.out.println(actorsList.get(int_id).display());
+			}
+			
+			else
+				System.out.println("Le "+ pers +" n'est pas connue du systême.");
 		}
+		catch (NumberFormatException e) {logMsg("INFO", "ID incorrect.");}
+		
+		
 		
 
-		else if(useList.containsKey(param.substring(1)))
-		{
-			ArrayList<Emission> actorsList = useList.get(param.substring(1)).playedEmission;
-			if(int_id < actorsList.size())
-				System.out.println(actorsList.get(int_id).display());
-		}
-		
-		else
-			System.out.println("Le "+ pers +" n'est pas connue du systême.");
 		
 		
 	}
@@ -492,6 +525,22 @@ public class InterfaceConsole {
 	}
 	
 	
+	private static void inprogress(Date d)
+	{
+		TreeMap<Date,Emission> begin = inputLists.emissionBegin;
+		TreeMap<Date,Emission> end = inputLists.emissionEnd;
+		
+		int duree_max = inputLists.length_max;
+		System.out.println(duree_max);
+	
+		ArrayList<Emission> em_end = new ArrayList<Emission>();
+		ArrayList<Emission> em_begin = new ArrayList<Emission>();
+		
+		
+		
+	}
+	
+	
 	/**
 	 * Log message for the system.
 	 * @param type The type of message
@@ -500,6 +549,7 @@ public class InterfaceConsole {
 	private static void logMsg(String type,String str)
 	{
 		System.out.println("["+type+"] - "+str);
+		
 	}
 	
 	

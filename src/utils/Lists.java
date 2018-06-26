@@ -30,7 +30,7 @@ public class Lists {
 	//Others
 	public HashMap<String,Integer> channedID;
 
-	
+	int length_max = 0;
 	
 	public Lists()
 	{
