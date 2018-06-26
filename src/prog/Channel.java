@@ -85,7 +85,6 @@ public class Channel {
 		    {
 		    	result += "\n" + e.toString();
 		    }
-		    value.clear();
 		}
 		return result;
 		

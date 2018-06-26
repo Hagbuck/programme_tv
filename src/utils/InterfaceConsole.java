@@ -382,11 +382,8 @@ public class InterfaceConsole {
 	private static void getProgChannel(String param)
 	{
 		for(Channel c : inputLists.channelsList)
-		{
 			if(c.getName().equals(param))
-				System.out.println("\n-- Programmation de " + c.getName() +"\n" + c.printAllPrograms());
-		}
-		
+				System.out.println("\n-- Programmation de " + c.getName() +"\n" + c.printAllPrograms());	
 	}
 	
 	/**
