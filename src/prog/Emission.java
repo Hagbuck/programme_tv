@@ -115,6 +115,7 @@ public class Emission {
 		
 		String str = "\n - - - - [FICHE EMISSION] - - - - \n";
 		str += "\n - Titre : "+this.title;
+		str += "\n - Channel : "+this.channelName;
 		str += "\n - Commence "+form.format(this.date_begin);
 		str += "\n - Fini "+form.format(this.date_end);
 		str += "\n - Type : "+this.type;

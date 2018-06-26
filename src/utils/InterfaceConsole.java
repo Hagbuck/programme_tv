@@ -500,12 +500,12 @@ public class InterfaceConsole {
 		 for(int i=0;i < wordsSplit.length;i++)
 		 {
 			 //On controle leur existence dans notre dictionnaire
-			if(searchlist.containsKey(wordsSplit[i]) && !wordsSplit[i].equals(""))
+			if(searchlist.containsKey(wordsSplit[i].toLowerCase()) && !wordsSplit[i].toLowerCase().equals(""))
 			{
 				//On display les emissions concernées
-				for(int j=0; j <  searchlist.get(wordsSplit[i]).size() ; j++)
+				for(int j=0; j <  searchlist.get(wordsSplit[i].toLowerCase()).size() ; j++)
 				{
-					System.out.println(searchlist.get(wordsSplit[i]).get(j).display());
+					System.out.println(searchlist.get(wordsSplit[i].toLowerCase()).get(j).display());
 				}
 			}
 			
