@@ -31,7 +31,7 @@ public class Channel {
 	
 	public String toString()
 	{
-		return "[CHANNEL] - "+name+" ("+id+")";
+		return "[CHANNEL] - "+name;
 	}
 
 	/******* GETER & SETER ******/

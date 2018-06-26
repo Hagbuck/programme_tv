@@ -6,14 +6,15 @@ import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
-
 import javax.swing.plaf.BorderUIResource.EmptyBorderUIResource;
 
 import prog.*;
@@ -24,6 +25,7 @@ public class InterfaceConsole {
 	private static boolean run = false;
 	private static Lists inputLists;
 	private static BufferedReader buf ;
+	static final long ONE_MINUTE_IN_MILLIS=60000;
 	
 	public static void initConsole(Lists p_lists) throws IOException //Passé liste en paramètre
 	{
@@ -527,17 +529,73 @@ public class InterfaceConsole {
 	
 	private static void inprogress(Date d)
 	{
+		//RECUP
 		TreeMap<Date,Emission> begin = inputLists.emissionBegin;
 		TreeMap<Date,Emission> end = inputLists.emissionEnd;
 		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		try {
+			d =  sdf.parse("11/05/2018");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//VARS
 		int duree_max = inputLists.length_max;
-		System.out.println(duree_max);
-	
+		Date date_lim_sup = d;
+		Date date_lim_inf = d;
+		
+		//Build date limite supp
+		Calendar trans_date = Calendar.getInstance();
+		trans_date.setTime(date_lim_sup);
+		long t= trans_date.getTimeInMillis();
+		date_lim_sup =new Date(t + (duree_max * ONE_MINUTE_IN_MILLIS));
+		
+		//Build date limite inf
+		trans_date = Calendar.getInstance();
+		trans_date.setTime(date_lim_inf);
+		t= trans_date.getTimeInMillis();
+		date_lim_inf =new Date(t - (duree_max * ONE_MINUTE_IN_MILLIS));
+		
+		/*
+		System.out.println(date_lim_inf);
+		System.out.println(d);
+		System.out.println(date_lim_sup);
+		*/
+		
 		ArrayList<Emission> em_end = new ArrayList<Emission>();
 		ArrayList<Emission> em_begin = new ArrayList<Emission>();
+		ArrayList<Emission> final_em = new ArrayList<Emission>();
 		
 		
+		for (Entry<Date, Emission> entree : end.entrySet()) 
+			if(date_lim_sup.after(entree.getKey()) && d.before(entree.getKey()))
+				em_end.add(entree.getValue());
+			
+			
+		for (Entry<Date, Emission> entree : begin.entrySet()) 
+			if(date_lim_inf.before(entree.getKey()) && d.after(entree.getKey()) )
+				em_begin.add(entree.getValue());
+			
+			
+		if(em_begin.size() > em_end.size())
+		{
+			for(int i=0;i < em_end.size();i++ )
+				if(em_begin.contains(em_end.get(i)))
+					final_em.add(em_end.get(i));
+		}
 		
+		else
+		{
+			for(int i=0;i < em_begin.size();i++ )
+				if(em_end.contains(em_begin.get(i)))
+					final_em.add(em_begin.get(i));
+		}
+		
+		for(int i = 0; i < final_em.size() ; i++)
+			System.out.println(final_em.get(i).display());
+
 	}
 	
 	
