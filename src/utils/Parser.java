@@ -271,9 +271,9 @@ public class Parser {
 					            		xmlsr.next();
 					            		length = Integer.parseInt(xmlsr.getText());
 					            		
-					            		if(unitOfLength == "minutes" && length > lists.length_max)
+					            		if(unitOfLength.equals("minutes") && length > lists.length_max)
 					            			lists.length_max = length;
-					            		else if(unitOfLength == "hours" && length * 60 > lists.length_max )
+					            		else if(unitOfLength.equals("hours") && length * 60 > lists.length_max )
 					            			lists.length_max = length * 60;
 					            	}
 					            	else if (xmlsr.getLocalName().equals("icon"))
